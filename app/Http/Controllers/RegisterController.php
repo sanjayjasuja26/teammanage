@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Validator;
+use App\User;
+use Hash;
+
 
 class RegisterController extends Controller
 {
@@ -13,6 +17,23 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
-      echo "<pre>";print_r($request->all());die;
+      $validator = Validator::make($request->all(), [
+      'name' => 'required',
+      'email' => 'required|email|unique:users',
+      'password' => 'required|min:8',
+      'confirm-password'=>'required|min:8|same:password'
+]);
+if ($validator->fails()) {
+           return redirect('register')
+                       ->withErrors($validator)
+                       ->withInput();
+       }
+
+      $newregister=new User;
+      $newregister->name=$request->name;
+      $newregister->email=$request->email;
+      $newregister->password=Hash::make($request->password);
+      $newregister->save();
+      return redirect('register');
     }
 }

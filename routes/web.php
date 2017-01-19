@@ -13,6 +13,22 @@
 
 
 Route::get('/', 'LoginController@index');
-Route::get('register', 'RegisterController@index');
 
-Route::post('/register/store', 'RegisterController@store');
+Route::post('/login', 'LoginController@login');
+Route::get('/logout', 'LoginController@logout');
+
+Route::get('register', 'RegisterController@index');
+Route::post('/register/create', 'RegisterController@store');
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Admin route
+|--------------------------------------------------------------------------
+*/
+
+Route::group(['prefix'=>'admin','middleware' =>'auth'], function () {
+
+Route::get('/', 'AdminController@index');
+});

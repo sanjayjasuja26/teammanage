@@ -11,8 +11,10 @@
             </div>
             <h3>Register to IN+</h3>
             <p>Create account to see it in action.</p>
-            <form class="m-t" role="form" method="POST" action="/register/store">
+            <form class="m-t" role="form" method="POST" action="/register/create">
+                @include('errors.error')
               {{ csrf_field() }}
+
                 <div class="form-group">
                     <input type="text" name="name" class="form-control" placeholder="Name" required="">
                 </div>
@@ -23,7 +25,7 @@
                     <input type="password" name="password" class="form-control" placeholder="Password" required="">
                 </div>
                 <div class="form-group">
-                    <input type="password" name="confirm-password" class="form-control" placeholder="confirm-Password" required="">
+                    <input type="password" name="confirm-password" class="form-control" placeholder="confirm-Password" >
                 </div>
 
                 <button type="submit" class="btn btn-primary block full-width m-b">Register</button>
