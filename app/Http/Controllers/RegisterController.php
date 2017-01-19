@@ -10,4 +10,9 @@ class RegisterController extends Controller
     {
       return view('register.index');
     }
+
+    public function store(Request $request)
+    {
+      echo "<pre>";print_r($request->all());die;
+    }
 }
