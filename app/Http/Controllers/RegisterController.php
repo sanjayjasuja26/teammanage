@@ -17,6 +17,7 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
+      echo "here";die;
       $validator = Validator::make($request->all(), [
       'name' => 'required',
       'email' => 'required|email|unique:users',

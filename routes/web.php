@@ -36,4 +36,5 @@ Route::get('/manage', 'Admin\AdminController@manageuser');
 Route::get('/manage/delete{id}', 'Admin\AdminController@getdelete');
 Route::get('/manage/block{id}', 'Admin\AdminController@getblock');
 Route::get('/manage/unblock{id}', 'Admin\AdminController@getunblock');
+Route::get('/manage/editaccount{id}', 'Admin\AdminController@editaccount');
 });

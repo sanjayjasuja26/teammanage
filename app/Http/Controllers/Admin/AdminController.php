@@ -47,4 +47,11 @@ class AdminController extends Controller
        $user->save();
        return back();
     }
+    public function editaccount($id)
+    {
+      $data['users']=User::where('id',$id)->first();
+
+      return view('admin.manageuser.editaccount',$data);
+
+    }
 }

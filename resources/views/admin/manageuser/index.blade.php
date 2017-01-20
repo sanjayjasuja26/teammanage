@@ -49,6 +49,7 @@
                       <td>{{$user->created_at}}</td>
                       <td>{{$user->role}}</td>
                       <td class="center"> <span><a href="/admin/manage/delete{{$user->id}}">delete</a></span>|
+                        <span><a href="/admin/manage/editaccount{{$user->id}}">Edit Account</a></span>|
                         @if($user->active=='1')
                            <span><a href="/admin/manage/block{{$user->id}}">block</a></span>
 
@@ -56,6 +57,7 @@
                              <span><a href="/admin/manage/unblock{{$user->id}}">un-block</a></span>
 
                         @endif
+
 
                       </td>
                   </tr>

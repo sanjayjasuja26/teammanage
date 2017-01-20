@@ -4,11 +4,11 @@
             <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
                     <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="/img/profile_small.jpg" />
+                            <img alt="image" class="img-circle" src="#" />
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Admin</strong>
-                            </span> <span class="text-muted text-xs block">Admin <b class="caret"></b></span> </span> </a>
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{Auth::user()->name}}</strong>
+                            </span> <span class="text-muted text-xs block">{{Auth::user()->role}} <b class="caret"></b></span> </span> </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li><a href="profile.html">Profile</a></li>
                             <li class="divider"></li>
@@ -17,10 +17,16 @@
                     </div>
 
                 </li>
+                @if(Auth::user()->role=='superadmin')
                 <li>
                     <a href="/admin/manage"><i class="fa fa-th-large"></i> <span class="nav-label">Manage User</span></a>
 
                 </li>
+                @else
+                <li>
+                    <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Register</span></a>
+                </li>
+                @endif
             </ul>
         </div>
     </nav>

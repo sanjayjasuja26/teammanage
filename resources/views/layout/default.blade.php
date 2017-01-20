@@ -18,16 +18,16 @@
 
 <body class="">
 
+
     <div id="wrapper">
        @include('includes.left_nav_admin_front')
         <div id="page-wrapper" class="gray-bg">
           @include('includes.header_nav_admin_front')
-
           @yield('content')
-
           @include('includes.footer_admin_front')
         </div>
       </div>
+
 
     <!-- Mainly scripts -->
     <script src="/js/jquery-2.1.1.js"></script>

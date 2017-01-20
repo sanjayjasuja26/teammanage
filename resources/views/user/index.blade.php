@@ -1,4 +1,4 @@
-@extends('layout.defaultuserview')
+@extends('layout.default')
 @section('content')
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-sm-4">
