@@ -18,7 +18,18 @@ class LoginController extends Controller
       'email' => 'email|required|exists:users'
       ]);
      if(Auth::attempt(['email' => $request->email, 'password' =>$request->password])){
-      return redirect('admin');
+
+       if(Auth::user()->role=='superadmin')
+       {
+         return redirect('admin');
+       }
+        elseif(Auth::user()->active=='0')
+         {
+           return redirect('/')->withInput()->with('success', 'You are blocked.');
+         }
+         else {
+           return view('user.index');
+         }
     }
    else
       {

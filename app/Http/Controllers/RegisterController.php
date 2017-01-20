@@ -33,6 +33,8 @@ if ($validator->fails()) {
       $newregister->name=$request->name;
       $newregister->email=$request->email;
       $newregister->password=Hash::make($request->password);
+      $newregister->role='user';
+      $newregister->active='1';
       $newregister->save();
       return redirect('register');
     }

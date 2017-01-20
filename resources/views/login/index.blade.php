@@ -11,6 +11,11 @@
       <!--Continually expanded and constantly improved Inspinia Admin Them (IN+)-->
       </p>
       <p>Login in. To see it in action.</p>
+      @if(Session::has('success'))
+    <div class="alert-box success">
+        <h2>{{ Session::get('success') }}</h2>
+    </div>
+     @endif
         <form class="m-t" role="form" method="POST" action="/login">
             @include('errors.error')
             {{ csrf_field() }}
