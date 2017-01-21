@@ -30,11 +30,17 @@ Route::post('/register/create', 'RegisterController@store');
 
 Route::group(['prefix'=>'admin','middleware' =>'auth'], function () {
 
-Route::get('/', 'Admin\AdminController@index');
+      Route::get('/', 'Admin\AdminController@index');
+      Route::get('/manage', 'Admin\AdminController@manageuser');
+      Route::get('/manage/delete{id}', 'Admin\AdminController@getdelete');
+      Route::get('/manage/block{id}', 'Admin\AdminController@getblock');
+      Route::get('/manage/unblock{id}', 'Admin\AdminController@getunblock');
+      Route::get('/manage/accessaccount/{id}', 'Admin\AdminController@accessaccount');
+      Route::get('/manage/back{id}', 'Admin\AdminController@getback');
+});
 
-Route::get('/manage', 'Admin\AdminController@manageuser');
-Route::get('/manage/delete{id}', 'Admin\AdminController@getdelete');
-Route::get('/manage/block{id}', 'Admin\AdminController@getblock');
-Route::get('/manage/unblock{id}', 'Admin\AdminController@getunblock');
-Route::get('/manage/editaccount{id}', 'Admin\AdminController@editaccount');
+Route::group(['prefix'=>'user','middleware' =>'auth'], function () {
+      Route::get('/', 'UserController@index');
+
+
 });

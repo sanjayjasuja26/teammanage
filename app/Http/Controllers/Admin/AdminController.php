@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
+use Session;
 use App\User;
 
 class AdminController extends Controller
@@ -22,7 +23,7 @@ class AdminController extends Controller
     }
     public function manageuser()
     {
-      $data['users']=User::where('role','user')->get();
+      $data['users']=User::where('role_id',1)->get();
       return view('admin.manageuser.index',$data);
     }
     public function getdelete($id)
@@ -47,11 +48,26 @@ class AdminController extends Controller
        $user->save();
        return back();
     }
-    public function editaccount($id)
+    public function accessaccount($id)
     {
-      $data['users']=User::where('id',$id)->first();
+      if(!Session::has('superadminId')){
+         Session::put('superadminrollId', Auth::user()->role_id);
+         Session::put('superadminId', Auth::user()->id);
 
-      return view('admin.manageuser.editaccount',$data);
+         Auth::loginUsingId($id);
+       }
+         elseif(Session::has('superadminId')) {
 
+           $id = Session::get('superadminId');
+           Auth::logout();
+           Auth::loginUsingId($id);
+           Session::forget('superadminrollId');
+           Session::forget('superadminId');
+         }
+
+
+
+       return redirect('user');
     }
+
 }

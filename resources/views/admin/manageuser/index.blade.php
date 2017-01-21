@@ -47,9 +47,9 @@
                       <td>{{$user->email}}
                       </td>
                       <td>{{$user->created_at}}</td>
-                      <td>{{$user->role}}</td>
+                      <td>{{$user->role->role}}</td>
                       <td class="center"> <span><a href="/admin/manage/delete{{$user->id}}">delete</a></span>|
-                        <span><a href="/admin/manage/editaccount{{$user->id}}">Edit Account</a></span>|
+                        <span><a href="/admin/manage/accessaccount/{{$user->id}}">Access Account</a></span>|
                         @if($user->active=='1')
                            <span><a href="/admin/manage/block{{$user->id}}">block</a></span>
 

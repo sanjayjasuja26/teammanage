@@ -15,8 +15,8 @@ class UsersTableSeeder extends Seeder
     {
       User::truncate();
         $users=[
-          ['name'=>'superadmin','email'=>'superadmin@gmail.com','password'=>Hash::make('123456789'),'role_id'=>2],
-          ['name'=>'admin','email'=>'admin@gmail.com','password'=>Hash::make('123456789'),'role_id'=>3]
+          ['name'=>'superadmin','email'=>'superadmin@gmail.com','password'=>Hash::make('123456789'),'role_id'=>2,'active'=>'1'],
+          ['name'=>'admin','email'=>'admin@gmail.com','password'=>Hash::make('123456789'),'role_id'=>3,'active'=>'1']
         ];
         foreach ($users as $user) {
           $newuser= new User;
@@ -24,6 +24,7 @@ class UsersTableSeeder extends Seeder
           $newuser->email=$user['email'];
           $newuser->password=$user['password'];
           $newuser->role_id=$user['role_id'];
+          $newuser->active=$user['active'];
           $newuser->save();
         }
     }

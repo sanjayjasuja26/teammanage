@@ -19,7 +19,7 @@ class LoginController extends Controller
       ]);
      if(Auth::attempt(['email' => $request->email, 'password' =>$request->password])){
 
-       if(Auth::user()->role=='superadmin')
+       if(Auth::user()->role_id==2)
        {
          return redirect('admin');
        }
@@ -28,7 +28,7 @@ class LoginController extends Controller
            return redirect('/')->withInput()->with('success', 'You are blocked.');
          }
          else {
-           return view('user.index');
+           return redirect('user');
          }
     }
    else

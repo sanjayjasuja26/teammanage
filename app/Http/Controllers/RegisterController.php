@@ -17,7 +17,7 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
-      echo "here";die;
+
       $validator = Validator::make($request->all(), [
       'name' => 'required',
       'email' => 'required|email|unique:users',
@@ -34,7 +34,7 @@ if ($validator->fails()) {
       $newregister->name=$request->name;
       $newregister->email=$request->email;
       $newregister->password=Hash::make($request->password);
-      $newregister->role='user';
+      $newregister->role_id=1;
       $newregister->active='1';
       $newregister->save();
       return redirect('register');

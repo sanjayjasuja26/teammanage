@@ -15,14 +15,13 @@ class rolesTableSeeder extends Seeder
     {
        Role::truncate();
         $roles=[
-          ['role_id'=>1,'role'=>'user'],
-          ['role_id'=>2,'role'=>'superadmin'],
-          ['role_id'=>3,'role'=>'admin']
+          ['role'=>'user'],
+          ['role'=>'superadmin'],
+          ['role'=>'admin']
         ];
         foreach($roles as $role)
         {
           $newroles = new Role;
-          $newroles->role_id=$role['role_id'];
           $newroles->role=$role['role'];
           $newroles->save();
         }
