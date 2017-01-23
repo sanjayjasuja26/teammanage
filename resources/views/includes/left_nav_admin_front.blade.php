@@ -15,17 +15,15 @@
                             <li><a href="/logout">Logout</a></li>
                         </ul>
                     </div>
-
                 </li>
                 @if(Auth::user()->role_id==2)
                 <li>
                     <a href="/admin/manage"><i class="fa fa-th-large"></i> <span class="nav-label">Manage User</span></a>
-
                 </li>
                 @else
                   @if(Session::has('superadminrollId') || Auth::user()->roll_id == '2')
                     <li>
-                      <a href="/admin/manage/accessaccount/{{Session::get('superadminId')}}"><i class="fa fa-th-large"></i> <span class="nav-label">Back</span></a>
+                      <a href="/admin/manage/user/accessaccount/{{Session::get('superadminId')}}"><i class="fa fa-th-large"></i> <span class="nav-label">Back</span></a>
                     </li>
 
                   @endif

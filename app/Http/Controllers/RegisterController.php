@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Validator;
 use App\User;
 use Hash;
+use Auth;
 
 
 class RegisterController extends Controller
@@ -17,6 +18,7 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
+      
 
       $validator = Validator::make($request->all(), [
       'name' => 'required',
@@ -37,6 +39,7 @@ if ($validator->fails()) {
       $newregister->role_id=1;
       $newregister->active='1';
       $newregister->save();
-      return redirect('register');
+       Auth::loginUsingId($newregister->id);
+      return redirect('user');
     }
 }

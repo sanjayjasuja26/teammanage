@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Auth;
 use Session;
 use App\User;
+use Redirect;
+
 
 class AdminController extends Controller
 {
@@ -23,8 +25,7 @@ class AdminController extends Controller
     }
     public function manageuser()
     {
-      $data['users']=User::where('role_id',1)->get();
-      return view('admin.manageuser.index',$data);
+      return view('admin.manageuser.index',['users'=>User::where('role_id',1)->get()]);
     }
     public function getdelete($id)
     {
@@ -50,24 +51,36 @@ class AdminController extends Controller
     }
     public function accessaccount($id)
     {
+
       if(!Session::has('superadminId')){
+
+
          Session::put('superadminrollId', Auth::user()->role_id);
          Session::put('superadminId', Auth::user()->id);
+         Session::put('currentUrl', url()->previous());
 
          Auth::loginUsingId($id);
+         return redirect('user');
        }
          elseif(Session::has('superadminId')) {
+           
 
            $id = Session::get('superadminId');
+           $url=Session::get('currentUrl');
+
            Auth::logout();
            Auth::loginUsingId($id);
+           Session::forget('currentUrl');
+
            Session::forget('superadminrollId');
            Session::forget('superadminId');
+           return Redirect::to($url);
          }
+    }
 
-
-
-       return redirect('user');
+    public function create()
+    {
+      return view('admin.manageuser.create');
     }
 
 }

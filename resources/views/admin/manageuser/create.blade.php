@@ -23,29 +23,30 @@
 
                        <div class="ibox-content">
                            <form method="POST" action="/register/create" class="form-horizontal">
+                               @include('errors.error')
                                  {{ csrf_field() }}
                                <div class="form-group"><label class="col-sm-2 control-label">name</label>
 
                                    <div class="col-sm-10">
-                                     <input type="text" name="name" class="form-control">
+                                     <input type="text" name="name" class="form-control" required="">
                                     </div>
                                   </div>
                                <div class="hr-line-dashed"></div>
                                <div class="form-group"><label class="col-sm-2 control-label">Email</label>
                                    <div class="col-sm-10">
-                                     <input type="email"  name="email" class="form-control">
+                                     <input type="email"  name="email" class="form-control" required="">
                                    </div>
                                </div>
                                <div class="hr-line-dashed"></div>
                                <div class="form-group"><label class="col-sm-2 control-label">Password</label>
                                    <div class="col-sm-10">
-                                     <input type="password" class="form-control" name="password">
+                                     <input type="password" class="form-control" name="password" required="">
                                    </div>
                                </div>
                                <div class="hr-line-dashed"></div>
                                <div class="form-group"><label class="col-sm-2 control-label">Confirm Password</label>
                                    <div class="col-sm-10">
-                                     <input type="password" class="form-control" name="confirm-password">
+                                     <input type="password" class="form-control" name="confirm-password" required="">
                                    </div>
                                </div>
 
@@ -53,7 +54,7 @@
                                <div class="form-group">
                                    <div class="col-sm-4 col-sm-offset-2">
 
-                                       <button class="btn btn-primary" type="submit">Save changes</button>
+                                       <button class="btn btn-primary" type="submit">Create Account</button>
                                    </div>
                                </div>
                            </form>

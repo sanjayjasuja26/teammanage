@@ -22,8 +22,12 @@
               <div class="ibox float-e-margins">
                   <div class="ibox-title">
                       <h5>Manage users data </h5>
+                      <div class="ibox-tools">
+                        <a href="/admin/manage/user/create" type="button" class="btn btn-primary">Create User</a>
+                      </div>
 
                   </div>
+
                   <div class="ibox-content">
 
                       <div class="table-responsive">
@@ -48,13 +52,13 @@
                       </td>
                       <td>{{$user->created_at}}</td>
                       <td>{{$user->role->role}}</td>
-                      <td class="center"> <span><a href="/admin/manage/delete{{$user->id}}">delete</a></span>|
-                        <span><a href="/admin/manage/accessaccount/{{$user->id}}">Access Account</a></span>|
+                      <td class="center"> <span><a href="/admin/manage/user/delete{{$user->id}}">delete</a></span>|
+                        <span><a href="/admin/manage/user/accessaccount/{{$user->id}}">Access Account</a></span>|
                         @if($user->active=='1')
-                           <span><a href="/admin/manage/block{{$user->id}}">block</a></span>
+                           <span><a href="/admin/manage/user/block{{$user->id}}">block</a></span>
 
                         @else
-                             <span><a href="/admin/manage/unblock{{$user->id}}">un-block</a></span>
+                             <span><a href="/admin/manage/user/unblock{{$user->id}}">un-block</a></span>
 
                         @endif
 

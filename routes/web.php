@@ -13,15 +13,10 @@
 
 
 Route::get('/', 'LoginController@index');
-
 Route::post('/login', 'LoginController@login');
 Route::get('/logout', 'LoginController@logout');
-
 Route::get('register', 'RegisterController@index');
 Route::post('/register/create', 'RegisterController@store');
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Admin route
@@ -31,16 +26,25 @@ Route::post('/register/create', 'RegisterController@store');
 Route::group(['prefix'=>'admin','middleware' =>'auth'], function () {
 
       Route::get('/', 'Admin\AdminController@index');
-      Route::get('/manage', 'Admin\AdminController@manageuser');
-      Route::get('/manage/delete{id}', 'Admin\AdminController@getdelete');
-      Route::get('/manage/block{id}', 'Admin\AdminController@getblock');
-      Route::get('/manage/unblock{id}', 'Admin\AdminController@getunblock');
-      Route::get('/manage/accessaccount/{id}', 'Admin\AdminController@accessaccount');
-      Route::get('/manage/back{id}', 'Admin\AdminController@getback');
+
+         Route::group(['prefix'=>'manage'], function () {
+              Route::get('/', 'Admin\AdminController@manageuser');
+
+               Route::group(['prefix'=>'user'], function () {
+                 
+                  Route::get('delete{id}', 'Admin\AdminController@getdelete');
+                  Route::get('block{id}', 'Admin\AdminController@getblock');
+                  Route::get('unblock{id}', 'Admin\AdminController@getunblock');
+                  Route::get('accessaccount/{id}', 'Admin\AdminController@accessaccount');
+                  Route::get('back{id}', 'Admin\AdminController@getback');
+                  Route::get('create', 'Admin\AdminController@create');
+                });
+
+    });
 });
 
 Route::group(['prefix'=>'user','middleware' =>'auth'], function () {
-      Route::get('/', 'UserController@index');
+      Route::get('/', 'User\UserController@index');
 
 
 });
