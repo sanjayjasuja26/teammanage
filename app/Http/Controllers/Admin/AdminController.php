@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Validator;
 use Auth;
+use Hash;
 use Session;
 use App\User;
 use Redirect;
@@ -63,7 +65,7 @@ class AdminController extends Controller
          return redirect('user');
        }
          elseif(Session::has('superadminId')) {
-           
+
 
            $id = Session::get('superadminId');
            $url=Session::get('currentUrl');
@@ -81,6 +83,40 @@ class AdminController extends Controller
     public function create()
     {
       return view('admin.manageuser.create');
+    }
+
+    public function store(Request $request)
+    {
+    
+          $validator = Validator::make($request->all(), [
+          'name' => 'required',
+          'email' => 'required|email|unique:users',
+          'password' => 'required|min:8',
+          'confirm-password'=>'required|min:8|same:password',
+          'role_id'=> 'required'
+           ]);
+          if ($validator->fails()) {
+                     return redirect('/admin/manage/user/create')
+                                 ->withErrors($validator)
+                                 ->withInput();
+                 }
+
+
+
+          $newregister->name=$request->name;
+          $newregister->email=$request->email;
+          $newregister->password=Hash::make($request->password);
+          $newregister->role_id=$request->role_id;
+          $newregister->active='1';
+          $newregister->save();
+
+          return back();
+
+    }
+    public function getedit($id)
+    {
+      $data['users']=User::where('id',$id)->first();
+      return view('admin.manageuser.create',$data);
     }
 
 }
