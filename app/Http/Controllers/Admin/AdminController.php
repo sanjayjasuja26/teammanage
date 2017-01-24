@@ -87,7 +87,6 @@ class AdminController extends Controller
 
     public function store(Request $request)
     {
-    
           $validator = Validator::make($request->all(), [
           'name' => 'required',
           'email' => 'required|email|unique:users',
@@ -100,9 +99,7 @@ class AdminController extends Controller
                                  ->withErrors($validator)
                                  ->withInput();
                  }
-
-
-
+          $newregister=new User;
           $newregister->name=$request->name;
           $newregister->email=$request->email;
           $newregister->password=Hash::make($request->password);
@@ -114,9 +111,49 @@ class AdminController extends Controller
 
     }
     public function getedit($id)
+      {
+        return view('admin.manageuser.updateuser',['users'=>User::where('id',$id)->first()]);
+      }
+    public function updateuser(Request $request)
     {
-      $data['users']=User::where('id',$id)->first();
-      return view('admin.manageuser.create',$data);
+      $newregister=User::find($request->id);
+
+      if($newregister->email != $request->email){
+        $validator = Validator::make($request->all(), [
+          'email' => 'required|email|unique:users'
+
+           ]);
+
+            if ($validator->fails()) {
+                       return redirect('/admin/manage/user/edit/'.$request->id)
+                                   ->withErrors($validator)
+                                   ->withInput();
+             }
+         }
+             $validator = Validator::make($request->all(), [
+             'name' => 'required',
+             'password' => 'required|min:8',
+             'confirm-password'=>'required|min:8|same:password',
+             'role_id'=> 'required'
+              ]);
+               if ($validator->fails()) {
+
+                      return redirect('/admin/manage/user/edit/{{$request->id}}')
+                                  ->withErrors($validator)
+                                  ->withInput();
+
+                  }
+
+        $newregister =User::firstOrCreate(array('id'=>$request->id));
+        $newregister->name=$request->name;
+        $newregister->email=$request->email;
+        $newregister->password=Hash::make($request->password);
+        $newregister->role_id=$request->role_id;
+        $newregister->active='1';
+        $newregister->save();
+        return redirect('/admin/manage');
+
+
     }
 
 }

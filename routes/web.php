@@ -40,6 +40,7 @@ Route::group(['prefix'=>'admin','middleware' =>'auth'], function () {
                   Route::get('create', 'Admin\AdminController@create');
                   Route::post('store', 'Admin\AdminController@store');
                   Route::get('edit/{id}', 'Admin\AdminController@getedit');
+                  Route::post('update', 'Admin\AdminController@updateuser');
                 });
 
     });
