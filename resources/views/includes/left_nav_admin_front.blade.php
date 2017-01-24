@@ -27,6 +27,15 @@
 
                     <a href="/admin/manage"><i class="fa fa-th-large"></i> <span class="nav-label">Manage User</span></a>
                 </li>
+                @elseif(Auth::user()->role_id==3)
+                @if(Session::has('superadminrollId') || Auth::user()->roll_id == '2')
+                  <li>
+                    <a href="/admin/manage/user/accessaccount/{{Session::get('superadminId')}}"><i class="fa fa-th-large"></i> <span class="nav-label">Back</span></a>
+                  </li>
+                    @endif
+                  <li>
+                      <a href="/admin/manage/employ"><i class="fa fa-th-large"></i> <span class="nav-label">Manage Employ</span></a>
+                  </li>
 
                 @else
                   @if(Session::has('superadminrollId') || Auth::user()->roll_id == '2')
@@ -35,7 +44,7 @@
                     </li>
 
                   @endif
-                
+
                 @endif
             </ul>
         </div>

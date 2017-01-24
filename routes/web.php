@@ -43,6 +43,12 @@ Route::group(['prefix'=>'admin','middleware' =>'auth'], function () {
                   Route::post('update', 'Admin\AdminController@updateuser');
                   Route::get('viewprofile/{id}', 'Admin\AdminController@getprofile');
                 });
+             Route::group(['prefix'=>'employ'], function () {
+
+                 Route::get('/', 'Admin\AdminController@manageemploy');
+                 Route::get('create', 'Admin\AdminController@employcreate');
+
+             });
 
     });
 });

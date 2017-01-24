@@ -157,5 +157,14 @@ class AdminController extends Controller
     {
       return view('admin.manageuser.viewprofile',['user'=>User::find($id)]);
     }
+    public function manageemploy()
+    {
+      return view('admin.manageemploy.index');
+    }
+
+    public function employcreate()
+    {
+      return view('admin.manageemploy.create');
+    }
 
 }

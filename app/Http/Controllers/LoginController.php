@@ -19,7 +19,7 @@ class LoginController extends Controller
       ]);
      if(Auth::attempt(['email' => $request->email, 'password' =>$request->password])){
 
-       if(Auth::user()->role_id==2)
+       if(Auth::user()->role_id==2||Auth::user()->role_id==3)
        {
          return redirect('admin');
        }
