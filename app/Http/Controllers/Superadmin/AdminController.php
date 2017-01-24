@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Superadmin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
@@ -35,10 +35,12 @@ class AdminController extends Controller
     {
       User::find($id)->delete();
       return back();
+
     }
     public function getblock($id)
     {
       $user = User::firstOrCreate(array('id' =>$id));
+
      $user->active='0';
      $user->save();
      return back();
@@ -46,6 +48,7 @@ class AdminController extends Controller
     public function getunblock($id)
     {
         $user = User::firstOrCreate(array('id' =>$id));
+
        $user->active='1';
        $user->save();
        return back();
