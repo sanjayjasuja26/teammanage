@@ -27,7 +27,9 @@ class AdminController extends Controller
     }
     public function manageuser()
     {
-      return view('admin.manageuser.index',['users'=>User::where('role_id',1)->get()]);
+      $data['users']=User::where('id','!=',Auth::user()->id)->get();
+      
+      return view('admin.manageuser.index',$data);
     }
     public function getdelete($id)
     {
@@ -152,8 +154,11 @@ class AdminController extends Controller
         $newregister->active='1';
         $newregister->save();
         return redirect('/admin/manage');
+    }
 
-
+    public function getprofile($id)
+    {
+      return view('admin.manageuser.viewprofile',['user'=>User::find($id)]);
     }
 
 }

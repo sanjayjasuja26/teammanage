@@ -34,25 +34,33 @@
                               </thead>
                               <tbody>
                               @foreach($users as $user)
-                              <tr class="gradeX">
-                                  <td>{{$user->name}}</td>
-                                  <td>{{$user->email}}
-                                  </td>
-                                  <td>{{$user->created_at}}</td>
-                                  <td>{{$user->role->role}}</td>
-                                  <td class="center"> <span><a href="/admin/manage/user/delete{{$user->id}}">delete</a></span>|
-                                    <span><a href="/admin/manage/user/accessaccount/{{$user->id}}">Access Account</a></span>|
-                                    <span><a href="/admin/manage/user/edit/{{$user->id}}">Edit</a></span>
-                          <!--
-                                    @if($user->active=='1')
-                                       <span><a href="/admin/manage/user/block{{$user->id}}">block</a></span>
-                                    @else
-                                         <span><a href="/admin/manage/user/unblock{{$user->id}}">un-block</a></span>
 
-                                    @endif
-                           -->
-                                  </td>
-                              </tr>
+                                  <tr class="gradeX">
+                                      <td>{{$user->name}}</td>
+                                      <td>{{$user->email}}
+                                      </td>
+                                      <td>{{$user->created_at}}</td>
+                                      <td>{{$user->role->role}}</td>
+                                      <td class="center">
+
+                                        <span><a href="/admin/manage/user/delete{{$user->id}}">delete</a></span>|
+
+                                        <span><a href="/admin/manage/user/accessaccount/{{$user->id}}">Access Account</a></span>|
+                                          
+                                              <span><a href="/admin/manage/user/viewprofile/{{$user->id}}">View profile</a></span>|
+                                        <span><a href="/admin/manage/user/edit/{{$user->id}}">Edit</a></span>
+                              <!--
+                                        @if($user->active=='1')
+                                           <span><a href="/admin/manage/user/block{{$user->id}}">block</a></span>
+                                        @else
+                                             <span><a href="/admin/manage/user/unblock{{$user->id}}">un-block</a></span>
+
+                                        @endif
+                               -->
+                                      </td>
+                                  </tr>
+
+
                                 @endforeach
                         </tbody>
                         </table>

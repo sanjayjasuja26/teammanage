@@ -41,6 +41,7 @@ Route::group(['prefix'=>'admin','middleware' =>'auth'], function () {
                   Route::post('store', 'Admin\AdminController@store');
                   Route::get('edit/{id}', 'Admin\AdminController@getedit');
                   Route::post('update', 'Admin\AdminController@updateuser');
+                  Route::get('viewprofile/{id}', 'Admin\AdminController@getprofile');
                 });
 
     });
