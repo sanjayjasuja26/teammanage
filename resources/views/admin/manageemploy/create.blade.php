@@ -2,14 +2,14 @@
 @section('content')
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-sm-4">
-        <h2><strong>Manage Employ</strong></h2>
+        <h2><strong>Create Employee</strong></h2>
     </div>
 </div>
 <div class="row">
                <div class="col-lg-12">
                    <div class="ibox float-e-margins">
                        <div class="ibox-content">
-                           <form method="POST" action="/admin/employ/store" class="form-horizontal">
+                           <form method="POST" action="/employee/store" class="form-horizontal">
                                  {{ csrf_field() }}
                                   @include('errors.error')
                                   <input type="hidden" name="id" value="{{isset($employs)? $employs->id :''}}">

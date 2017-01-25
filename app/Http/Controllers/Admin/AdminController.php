@@ -61,8 +61,12 @@ class AdminController extends Controller
          Session::put('currentUrl', url()->previous());
 
          Auth::loginUsingId($id);
-         if($data->role_id==2||$data->role_id==3){
+         if($data->role_id==2){
             return redirect('admin');
+          }
+          elseif($data->role_id==3){
+            return redirect('employee');
+
           }
          else{
            return redirect('user');
@@ -160,12 +164,12 @@ class AdminController extends Controller
     }
 
 
-    public function manageemploy()
+    public function manageemployee()
     {
      return view('admin.manageemploy.index',['employs'=>Employ::all()]);
     }
 
-    public function employcreate()
+    public function employeecreate()
     {
       return view('admin.manageemploy.create');
     }
@@ -174,12 +178,12 @@ class AdminController extends Controller
     {
         $validator = Validator::make($request->all(), [
         'name' => 'required',
-        'email' => 'required|email',
+        'email' => 'required|email||unique:employs',
         'phone_no'=>'required|numeric',
         'dagination_id'=> 'required'
        ]);
       if ($validator->fails()) {
-                 return redirect('/admin/employ/create')
+                 return redirect('/employee/create')
                              ->withErrors($validator)
                              ->withInput();
              }
@@ -189,47 +193,75 @@ class AdminController extends Controller
       $employ->phone_no=$request->phone_no;
       $employ->dagination_id=$request->dagination_id;
       $employ->save();
-      return redirect('/admin/employ');
+      return redirect('/employee');
     }
 
 
-    public function employdelete($id)
+    public function employeedelete($id)
     {
       Employ::find($id)->delete();
       return back();
     }
 
-    public function employedit($id)
+    public function employeeedit($id)
     {
       $data['employs']=Employ::find($id);
       return view('admin.manageemploy.update',$data);
     }
 
-    public function employupdate(Request $request)
+    public function employeeupdate(Request $request)
     {
-      $validator = Validator::make($request->all(), [
-      'name' => 'required',
-      'email' => 'required|email',
-      'phone_no'=>'required|numeric',
-      'dagination_id'=> 'required'
-     ]);
-    if ($validator->fails()) {
-               return redirect('/admin/employ/create')
-                           ->withErrors($validator)
-                           ->withInput();
-           }
+      $data=Employ::find($request->id);
+
+
+      if($data->email != $request->email){
+        $validator = Validator::make($request->all(), [
+          'email' => 'required|email|unique:employs'
+
+           ]);
+
+            if ($validator->fails()) {
+                       return redirect('/employee/update'.$request->id)
+                                   ->withErrors($validator)
+                                   ->withInput();
+             }
+         }
+
+          $validator = Validator::make($request->all(), [
+          'name' => 'required',
+          'phone_no'=>'required|numeric',
+          'dagination_id'=> 'required'
+         ]);
+           if ($validator->fails()) {
+                      return redirect('/employee/update')
+                               ->withErrors($validator)
+                               ->withInput();
+               }
+
+
+
+
     $employ= Employ::firstOrCreate(array('id'=>$request->id ));
     $employ->name=$request->name;
     $employ->email=$request->email;
     $employ->phone_no=$request->phone_no;
     $employ->dagination_id=$request->dagination_id;
     $employ->save();
-    return redirect('/admin/employ');
+    return redirect('/employee');
     }
 
-    public function employview($id)
+    public function employeeview($id)
     {
       return view('admin.manageemploy.employview',['employs'=>Employ::find($id)]);
+    }
+
+    public function employeeuploadfiles($id)
+    {
+      return view('admin.manageemploy.uploadfiles',['ids'=>$id]);
+    }
+    public function employeefileupload(Request $request)
+    {
+        echo "<pre>";print_r($request->all());die;
     }
 
 }

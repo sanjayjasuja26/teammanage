@@ -2,10 +2,10 @@
 @section('content')
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-sm-4">
-        <h2><strong>Manage Employ</strong></h2>
+        <h2><strong>Manage Employee</strong></h2>
     </div>
       <div   style="float:right;margin-top:20px">
-        <a href="/admin/employ/create" type="button" class="btn btn-primary">Create Employ</a>
+        <a href="/employee/create" type="button" class="btn btn-primary">Create Employee</a>
       </div>
 </div>
 
@@ -39,9 +39,10 @@
                                     <td>{{$employ->phone_no}}</td>
                                     <td>{{$employ->dagination->dagination}}</td>
                                     <td>
-                                        <span><a href="/admin/employ/delete/{{$employ->id}}"><span class="glyphicon glyphicon-trash" ></span></a></span>|
-                                        <span><a href="/admin/employ/edit/{{$employ->id}}"><span class="glyphicon glyphicon-edit" ></span></a></span>|
-                                        <span><a href="/admin/employ/viewprofile/{{$employ->id}}"><span class="fa fa-user" ></span></a></span>
+                                        <span><a href="/employee/delete/{{$employ->id}}" title="delete"><span class="glyphicon glyphicon-trash"  ></span></a></span>|
+                                        <span><a href="/employee/edit/{{$employ->id}}" title="Edit"><span class="glyphicon glyphicon-edit" ></span></a></span>|
+                                        <span><a href="/employee/viewprofile/{{$employ->id}}" title="Viewprofile"><span class="fa fa-user" ></span></a></span>|
+                                        <span><a href="/employee/uploadfiles/{{$employ->id}}" title="file Upload"><span class="fa fa-picture-o" ></span></a></span>
                                     </td>
                                   </tr>
                                @endforeach

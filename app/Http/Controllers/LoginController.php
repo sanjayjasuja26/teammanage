@@ -19,13 +19,13 @@ class LoginController extends Controller
       ]);
      if(Auth::attempt(['email' => $request->email, 'password' =>$request->password])){
 
-       if(Auth::user()->role_id==2||Auth::user()->role_id==3)
+       if(Auth::user()->role_id==2)
        {
          return redirect('admin');
        }
-        elseif(Auth::user()->active=='0')
+        elseif(Auth::user()->role_id==3)
          {
-           return redirect('/')->withInput()->with('success', 'You are blocked.');
+           return redirect('employee');
          }
          else {
            return redirect('user');
