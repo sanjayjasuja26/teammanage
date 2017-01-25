@@ -14,29 +14,37 @@
               <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                   <div class="ibox-title">
-                      <h5>Manage Employ data </h5>
+                      <h5>Total Employ  {{$employs->count()}} </h5>
                   </div>
 
                   <div class="ibox-content">
                       <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover dataTables-example" >
                            <thead>
-
                               <tr>
                                   <th>Name</th>
                                   <th>Email</th>
                                   <th>Phone no</th>
-                                  
-
+                                  <th>Dagination</th>
+                                  <th>Action</th>
                               </tr>
 
                               </thead>
                               <tbody>
-
+                              @foreach($employs as $employ)
 
                                   <tr class="gradeX">
-
+                                    <td>{{$employ->name}}</td>
+                                    <td>{{$employ->email}}</td>
+                                    <td>{{$employ->phone_no}}</td>
+                                    <td>{{$employ->dagination->dagination}}</td>
+                                    <td>
+                                        <span><a href="/admin/manage/employ/delete/{{$employ->id}}"><span class="glyphicon glyphicon-trash" ></span></a></span>|
+                                        <span><a href="/admin/manage/employ/edit/{{$employ->id}}"><span class="glyphicon glyphicon-edit" ></span></a></span>|
+                                        <span><a href="/admin/manage/employ/view/{{$employ->id}}"><span class="fa fa-user" ></span></a></span>
+                                    </td>
                                   </tr>
+                               @endforeach
 
 
 

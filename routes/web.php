@@ -47,7 +47,11 @@ Route::group(['prefix'=>'admin','middleware' =>'auth'], function () {
 
                  Route::get('/', 'Admin\AdminController@manageemploy');
                  Route::get('create', 'Admin\AdminController@employcreate');
-
+                 Route::post('store', 'Admin\AdminController@employstore');
+                 Route::get('delete/{id}', 'Admin\AdminController@employdelete');
+                 Route::get('edit/{id}', 'Admin\AdminController@employedit');
+                 Route::post('update', 'Admin\AdminController@employupdate');
+                 Route::get('view/{id}', 'Admin\AdminController@employview');
              });
 
     });
