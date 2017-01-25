@@ -43,6 +43,7 @@ Route::group(['prefix'=>'admin','middleware' =>'auth'], function () {
                   Route::post('update', 'Admin\AdminController@updateuser');
                   Route::get('viewprofile/{id}', 'Admin\AdminController@getprofile');
                 });
+            });
              Route::group(['prefix'=>'employ'], function () {
 
                  Route::get('/', 'Admin\AdminController@manageemploy');
@@ -51,10 +52,10 @@ Route::group(['prefix'=>'admin','middleware' =>'auth'], function () {
                  Route::get('delete/{id}', 'Admin\AdminController@employdelete');
                  Route::get('edit/{id}', 'Admin\AdminController@employedit');
                  Route::post('update', 'Admin\AdminController@employupdate');
-                 Route::get('view/{id}', 'Admin\AdminController@employview');
+                 Route::get('viewprofile/{id}', 'Admin\AdminController@employview');
              });
 
-    });
+
 });
 
 Route::group(['prefix'=>'user','middleware' =>'auth'], function () {

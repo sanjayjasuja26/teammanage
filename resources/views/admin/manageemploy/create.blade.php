@@ -9,7 +9,7 @@
                <div class="col-lg-12">
                    <div class="ibox float-e-margins">
                        <div class="ibox-content">
-                           <form method="POST" action="/admin/manage/employ/store" class="form-horizontal">
+                           <form method="POST" action="/admin/employ/store" class="form-horizontal">
                                  {{ csrf_field() }}
                                   @include('errors.error')
                                   <input type="hidden" name="id" value="{{isset($employs)? $employs->id :''}}">

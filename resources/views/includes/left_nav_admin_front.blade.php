@@ -34,7 +34,7 @@
                   </li>
                     @endif
                   <li>
-                      <a href="/admin/manage/employ"><i class="fa fa-th-large"></i> <span class="nav-label">Manage Employ</span></a>
+                      <a href="/admin/employ"><i class="fa fa-th-large"></i> <span class="nav-label">Manage Employ</span></a>
                   </li>
 
                 @else

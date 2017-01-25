@@ -61,7 +61,7 @@ class AdminController extends Controller
          Session::put('currentUrl', url()->previous());
 
          Auth::loginUsingId($id);
-         if($data->role_id==2){
+         if($data->role_id==2||$data->role_id==3){
             return redirect('admin');
           }
          else{
@@ -158,6 +158,8 @@ class AdminController extends Controller
     {
       return view('admin.manageuser.viewprofile',['user'=>User::find($id)]);
     }
+
+
     public function manageemploy()
     {
      return view('admin.manageemploy.index',['employs'=>Employ::all()]);
@@ -177,7 +179,7 @@ class AdminController extends Controller
         'dagination_id'=> 'required'
        ]);
       if ($validator->fails()) {
-                 return redirect('/admin/manage/employ/create')
+                 return redirect('/admin/employ/create')
                              ->withErrors($validator)
                              ->withInput();
              }
@@ -187,7 +189,7 @@ class AdminController extends Controller
       $employ->phone_no=$request->phone_no;
       $employ->dagination_id=$request->dagination_id;
       $employ->save();
-      return redirect('/admin/manage/employ');
+      return redirect('/admin/employ');
     }
 
 
@@ -212,7 +214,7 @@ class AdminController extends Controller
       'dagination_id'=> 'required'
      ]);
     if ($validator->fails()) {
-               return redirect('/admin/manage/employ/create')
+               return redirect('/admin/employ/create')
                            ->withErrors($validator)
                            ->withInput();
            }
@@ -222,7 +224,7 @@ class AdminController extends Controller
     $employ->phone_no=$request->phone_no;
     $employ->dagination_id=$request->dagination_id;
     $employ->save();
-    return redirect('/admin/manage/employ');
+    return redirect('/admin/employ');
     }
 
     public function employview($id)

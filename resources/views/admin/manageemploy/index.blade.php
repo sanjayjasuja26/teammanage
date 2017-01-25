@@ -5,7 +5,7 @@
         <h2><strong>Manage Employ</strong></h2>
     </div>
       <div   style="float:right;margin-top:20px">
-        <a href="/admin/manage/employ/create" type="button" class="btn btn-primary">Create Employ</a>
+        <a href="/admin/employ/create" type="button" class="btn btn-primary">Create Employ</a>
       </div>
 </div>
 
@@ -39,9 +39,9 @@
                                     <td>{{$employ->phone_no}}</td>
                                     <td>{{$employ->dagination->dagination}}</td>
                                     <td>
-                                        <span><a href="/admin/manage/employ/delete/{{$employ->id}}"><span class="glyphicon glyphicon-trash" ></span></a></span>|
-                                        <span><a href="/admin/manage/employ/edit/{{$employ->id}}"><span class="glyphicon glyphicon-edit" ></span></a></span>|
-                                        <span><a href="/admin/manage/employ/view/{{$employ->id}}"><span class="fa fa-user" ></span></a></span>
+                                        <span><a href="/admin/employ/delete/{{$employ->id}}"><span class="glyphicon glyphicon-trash" ></span></a></span>|
+                                        <span><a href="/admin/employ/edit/{{$employ->id}}"><span class="glyphicon glyphicon-edit" ></span></a></span>|
+                                        <span><a href="/admin/employ/viewprofile/{{$employ->id}}"><span class="fa fa-user" ></span></a></span>
                                     </td>
                                   </tr>
                                @endforeach
