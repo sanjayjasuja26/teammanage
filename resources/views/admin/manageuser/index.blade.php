@@ -43,10 +43,10 @@
                                       <td>{{$user->role->role}}</td>
                                       <td class="center">
 
-                                        <span><a href="/admin/manage/user/delete{{$user->id}}"><span class="glyphicon glyphicon-trash" ></span></a></span>|
-                                        <span><a href="/admin/manage/user/accessaccount/{{$user->id}}"><span class="fa fa-key" ></span></a></span>|
-                                        <span><a href="/admin/manage/user/viewprofile/{{$user->id}}"><span class="fa fa-user" ></span></a></span>|
-                                        <span><a href="/admin/manage/user/edit/{{$user->id}}"><span class="glyphicon glyphicon-edit" ></span></a></span>
+                                        <span><a href="/admin/manage/user/delete{{$user->id}}" title="Delete"><span class="glyphicon glyphicon-trash" ></span></a></span>|
+                                        <span><a href="/admin/manage/user/accessaccount/{{$user->id}}" title="Accessaccount"><span class="fa fa-key" ></span></a></span>|
+                                        <span><a href="/admin/manage/user/viewprofile/{{$user->id}}" title="ViewProfile"><span class="fa fa-user" ></span></a></span>|
+                                        <span><a href="/admin/manage/user/edit/{{$user->id}}" title="Editprofile"><span class="glyphicon glyphicon-edit" ></span></a></span>
                               <!--
                                         @if($user->active=='1')
                                            <span><a href="/admin/manage/user/block{{$user->id}}">block</a></span>

@@ -10,9 +10,7 @@
                             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{Auth::user()->name}}</strong>
                             </span> <span class="text-muted text-xs block">{{Auth::user()->role->role}} <b class="caret"></b></span> </span> </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="profile.html">Profile</a></li>
-                            <li class="divider"></li>
-                            <li><a href="/logout">Logout</a></li>
+                              <li><a href="/logout">Logout</a></li>
                         </ul>
                     </div>
                 </li>

@@ -12,17 +12,16 @@
                <div class="col-lg-12">
                    <div class="ibox float-e-margins">
                        <div class="ibox-content">
-                         {{$ids}}
-                           <form method="POST" action="/employee/fileupload" class="form-horizontal" enctype="multipart/form-data">
+                          <form method="POST" action="/employee/fileupload" class="form-horizontal" enctype="multipart/form-data">
                                  {{ csrf_field() }}
-                                  @include('errors.error')
-                                  <input type="hidden" name="id" value="{{$ids}}">
-                                  <input type="file" name="fileToUpload" id="fileToUpload">
+
+                                  <input type="hidden" name="employ_id" value="{{$ids}}">
+                                  <input type="file" name="fileupload" id="fileupload">
 
                                     <div class="hr-line-dashed"></div>
                                      <div class="form-group">
                                          <div class="col-sm-4 col-sm-offset-2">
-                                            <button class="btn btn-primary" type="submit">Create Employ</button>
+                                            <button class="btn btn-primary" type="submit">Upload File</button>
                                          </div>
                                      </div>
                            </form>

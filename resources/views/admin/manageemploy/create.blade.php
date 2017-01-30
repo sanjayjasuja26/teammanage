@@ -9,7 +9,7 @@
                <div class="col-lg-12">
                    <div class="ibox float-e-margins">
                        <div class="ibox-content">
-                           <form method="POST" action="/employee/store" class="form-horizontal">
+                           <form method="POST" action="/employee/store" class="form-horizontal" enctype="multipart/form-data">
                                  {{ csrf_field() }}
                                   @include('errors.error')
                                   <input type="hidden" name="id" value="{{isset($employs)? $employs->id :''}}">
@@ -40,6 +40,11 @@
                                             </select>
                                           </div>
                                      </div>
+                                     <div class="form-group"><label class="col-sm-2 control-label">fileupload</label>
+                                         <div class="form-group">
+                                            <input type="file" name="fileupload" id="fileupload" >
+                                         </div>
+                                    </div>
                                      <div class="hr-line-dashed"></div>
                                     <div class="hr-line-dashed"></div>
                                      <div class="form-group">

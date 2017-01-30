@@ -9,7 +9,9 @@ use Hash;
 use Session;
 use App\User;
 use App\Employ;
+use App\Employdocement;
 use Redirect;
+use File;
 
 
 class AdminController extends Controller
@@ -174,26 +176,43 @@ class AdminController extends Controller
       return view('admin.manageemploy.create');
     }
 
-    public function employstore(Request $request)
+    public function employeestore(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
         'name' => 'required',
         'email' => 'required|email||unique:employs',
         'phone_no'=>'required|numeric',
+        'fileupload'=>'required',
         'dagination_id'=> 'required'
        ]);
-      if ($validator->fails()) {
-                 return redirect('/employee/create')
-                             ->withErrors($validator)
-                             ->withInput();
-             }
-      $employ= new Employ;
-      $employ->name=$request->name;
-      $employ->email=$request->email;
-      $employ->phone_no=$request->phone_no;
-      $employ->dagination_id=$request->dagination_id;
-      $employ->save();
-      return redirect('/employee');
+          if ($validator->fails()) {
+                     return redirect('/employee/create')
+                                 ->withErrors($validator)
+                                 ->withInput();
+          }
+
+
+          $employ= new Employ;
+          $employ->name=$request->name;
+          $employ->email=$request->email;
+          $employ->phone_no=$request->phone_no;
+          $employ->dagination_id=$request->dagination_id;
+          $employ->save();
+
+          if($request->hasfile('fileupload'))
+          {
+            $uploadfile=new Employdocement;
+            $upload=$request->file('fileupload');
+            $path='uploads';
+            $uploadname=$upload->getClientOriginalName();
+            $uploadfile->fileupload=$path.'/'.$uploadname;
+            $uploadfile->employ_id=$employ->id;
+            $upload->move($path,$uploadname);
+            $uploadfile->save();
+          }
+
+          return redirect('/employee');
     }
 
 
@@ -205,21 +224,19 @@ class AdminController extends Controller
 
     public function employeeedit($id)
     {
+
       $data['employs']=Employ::find($id);
+
       return view('admin.manageemploy.update',$data);
     }
 
     public function employeeupdate(Request $request)
     {
       $data=Employ::find($request->id);
-
-
-      if($data->email != $request->email){
+       if($data->email != $request->email){
         $validator = Validator::make($request->all(), [
           'email' => 'required|email|unique:employs'
-
            ]);
-
             if ($validator->fails()) {
                        return redirect('/employee/update'.$request->id)
                                    ->withErrors($validator)
@@ -237,31 +254,53 @@ class AdminController extends Controller
                                ->withErrors($validator)
                                ->withInput();
                }
+   $employ= Employ::firstOrCreate(array('id'=>$request->id ));
+        $employ->name=$request->name;
+        $employ->email=$request->email;
+        $employ->phone_no=$request->phone_no;
+        $employ->dagination_id=$request->dagination_id;
+        $employ->save();
 
+    if($request->hasfile('fileupload'))
+      {
 
+        $uploadfile= Employdocement::firstOrCreate(array('employ_id'=>$request->id));
+        $upload=$request->file('fileupload');
+        $path='uploads';
 
+        $uploadname=$upload->getClientOriginalName();
+        $uploadfile->fileupload=$path.'/'.$uploadname;
+        $uploadfile->employ_id=$employ->id;
+        $upload->move($path,$uploadname);
+        $uploadfile->save();
+      }
 
-    $employ= Employ::firstOrCreate(array('id'=>$request->id ));
-    $employ->name=$request->name;
-    $employ->email=$request->email;
-    $employ->phone_no=$request->phone_no;
-    $employ->dagination_id=$request->dagination_id;
-    $employ->save();
-    return redirect('/employee');
+          return redirect('/employee');
     }
 
     public function employeeview($id)
     {
       return view('admin.manageemploy.employview',['employs'=>Employ::find($id)]);
     }
-
     public function employeeuploadfiles($id)
     {
-      return view('admin.manageemploy.uploadfiles',['ids'=>$id]);
+    return view('admin.manageemploy.uploadfiles',['ids'=>$id]);
     }
     public function employeefileupload(Request $request)
     {
-        echo "<pre>";print_r($request->all());die;
+      $uploadfile=new Employdocement;
+      if($request->hasfile('fileupload'))
+      {
+        $upload=$request->file('fileupload');
+        $path='uploads';
+        $uploadname=$upload->getClientOriginalName();
+        $uploadfile->fileupload=$path.'/'.$uploadname;
+        $upload->move($path,$uploadname);
+      }
+    $uploadfile->employ_id=$request->employ_id;
+    $uploadfile->save();
+    return redirect('/employee');
+
     }
 
 }
