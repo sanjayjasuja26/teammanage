@@ -261,20 +261,18 @@ class AdminController extends Controller
         $employ->dagination_id=$request->dagination_id;
         $employ->save();
 
-    if($request->hasfile('fileupload'))
-      {
+        if($request->hasfile('fileupload'))
+          {
+            $uploadfile= Employdocement::firstOrCreate(array('employ_id'=>$request->id));
+            $upload=$request->file('fileupload');
+            $path='uploads';
 
-        $uploadfile= Employdocement::firstOrCreate(array('employ_id'=>$request->id));
-        $upload=$request->file('fileupload');
-        $path='uploads';
-
-        $uploadname=$upload->getClientOriginalName();
-        $uploadfile->fileupload=$path.'/'.$uploadname;
-        $uploadfile->employ_id=$employ->id;
-        $upload->move($path,$uploadname);
-        $uploadfile->save();
-      }
-
+            $uploadname=$upload->getClientOriginalName();
+            $uploadfile->fileupload=$path.'/'.$uploadname;
+            $uploadfile->employ_id=$employ->id;
+            $upload->move($path,$uploadname);
+            $uploadfile->save();
+          }
           return redirect('/employee');
     }
 
@@ -300,6 +298,18 @@ class AdminController extends Controller
     $uploadfile->employ_id=$request->employ_id;
     $uploadfile->save();
     return redirect('/employee');
+
+    }
+
+    public function employeeaction(Request $request)
+    {
+
+          foreach($request->employ_id as $employ)
+          {
+            Employ::find($employ)->delete();
+          }
+      return back();
+
 
     }
 

@@ -17,7 +17,7 @@ $(document).ready(function () {
     }
 
     // MetsiMenu
-    $('#side-menu').metisMenu();
+
 
     // Collapse ibox function
     $('.collapse-link').click(function () {
@@ -62,12 +62,6 @@ $(document).ready(function () {
         $('#right-sidebar').toggleClass('sidebar-open');
     });
 
-    // Initialize slimscroll for right sidebar
-    $('.sidebar-container').slimScroll({
-        height: '100%',
-        railOpacity: 0.4,
-        wheelStep: 10
-    });
 
     // Open close small chat
     $('.open-small-chat').click(function () {
@@ -92,10 +86,7 @@ $(document).ready(function () {
 
     // Append config box / Only for demo purpose
     // Uncomment on server mode to enable XHR calls
-    $.get("skin-config.html", function (data) {
-        if (!$('body').hasClass('no-skin-config'))
-            $('body').append(data);
-    });
+    
 
     // Minimalize menu
     $('.navbar-minimalize').click(function () {
@@ -287,5 +278,3 @@ function WinMove() {
         })
         .disableSelection();
 }
-
-

@@ -12,15 +12,25 @@
           <div class="row">
               <div class="col-lg-12">
                 <div class="ibox float-e-margins">
+              @if($employs->count()!=0)
+                  <form method="post" action="/employee/action">
+                      {{csrf_field()}}
                   <div class="ibox-title">
                       <h5>Total Employ  {{$employs->count()}} </h5>
+                      <div class="deletecheckbox" style="float:right">
+                      <button class="btn btn-primary" name="button" value="delete" >
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                          Delete
+                      </button>
+                    </div>
                   </div>
                   <div class="ibox-content">
                       <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover dataTables-example" >
                            <thead>
                               <tr>
-                                  <th>Name</th>
+                                 <th><input class="chk_boxes"  type="checkbox" id="select_all"/></th>
+                                 <th>Name</th>
                                   <th>Email</th>
                                   <th>Phone no</th>
                                   <th>Dagination</th>
@@ -30,6 +40,7 @@
                               <tbody>
                               @foreach($employs as $employ)
                                   <tr class="gradeX">
+                                    <td><input type="checkbox" class="checkbox" name="employ_id[]" value="{{$employ->id}}" ></td>
                                     <td>{{$employ->name}}</td>
                                     <td>{{$employ->email}}</td>
                                     <td>{{$employ->phone_no}}</td>
@@ -37,19 +48,52 @@
                                     <td>
                                         <span><a href="/employee/delete/{{$employ->id}}" title="delete"><span class="glyphicon glyphicon-trash"  ></span></a></span>|
                                         <span><a href="/employee/edit/{{$employ->id}}" title="Edit"><span class="glyphicon glyphicon-edit" ></span></a></span>|
-                                        <span><a href="/employee/viewprofile/{{$employ->id}}" title="Viewprofile"><span class="fa fa-user" ></span></a></span>|
-                                        <span><a href="/employee/uploadfiles/{{$employ->id}}" title="file Upload"><span class="fa fa-picture-o" ></span></a></span>
+                                        <span><a href="/employee/viewprofile/{{$employ->id}}" title="Viewprofile"><span class="fa fa-user" ></span></a></span>
+
                                     </td>
                                   </tr>
                              @endforeach
+
                         </tbody>
                         </table>
                       </div>
                   </div>
+                </form>
+            @else
+            <div class="ibox-title">
+                <h5>Total Employ  {{$employs->count()}} </h5>
+              
+            </div>
+            @endif
                </div>
               </div>
           </div>
   </div>
-
-
 @endsection
+
+@section('extrascript')
+<script>
+$("#select_all").change(function(){  //"select all" change
+    var status = this.checked; // "select all" checked status
+
+      $('.checkbox').each(function(){ //iterate all listed checkbox items
+          this.checked = status; //change ".checkbox" checked status
+        });
+
+      $(".checkbox").change(function(){
+            if(this.checked==false)
+              {
+                $('#select_all')[0].checked=false;
+              }
+            if($('.checkbox:checked').length==$('.checkbox').length)
+              {
+                $('#select_all')[0].checked=true;
+              }
+        });
+
+  });
+
+
+
+
+</script> @endsection

@@ -59,6 +59,7 @@ Route::group(['prefix'=>'admin','middleware' =>'auth'], function () {
                  Route::get('viewprofile/{id}', 'Admin\AdminController@employeeview');
                  Route::get('uploadfiles/{id}', 'Admin\AdminController@employeeuploadfiles');
                  Route::post('fileupload', 'Admin\AdminController@employeefileupload');
+                 Route::post('action', 'Admin\AdminController@employeeaction');
 
           });
 
