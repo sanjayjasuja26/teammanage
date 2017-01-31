@@ -15,13 +15,15 @@
               @if($employs->count()!=0)
                   <form method="post" action="/employee/action">
                       {{csrf_field()}}
-                  <div class="ibox-title">
+                  <div class="ibox-title" style="margin-bottom:10px">
                       <h5>Total Employ  {{$employs->count()}} </h5>
                       <div class="deletecheckbox" style="float:right">
-                      <button class="btn btn-primary" name="button" value="delete" >
+
+                      <button class="btn btn-primary" name="button" value="delete" style="margin-bottm:10px">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                           Delete
                       </button>
+
                     </div>
                   </div>
                   <div class="ibox-content">
@@ -62,7 +64,7 @@
             @else
             <div class="ibox-title">
                 <h5>Total Employ  {{$employs->count()}} </h5>
-              
+
             </div>
             @endif
                </div>

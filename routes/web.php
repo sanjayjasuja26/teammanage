@@ -50,16 +50,14 @@ Route::group(['prefix'=>'admin','middleware' =>'auth'], function () {
              Route::group(['prefix'=>'employee','middleware' =>'auth'], function () {
 
 
-                 Route::get('/', 'Admin\AdminController@manageemployee');
-                 Route::get('create', 'Admin\AdminController@employeecreate');
-                 Route::post('store', 'Admin\AdminController@employeestore');
-                 Route::get('delete/{id}', 'Admin\AdminController@employeedelete');
-                 Route::get('edit/{id}', 'Admin\AdminController@employeeedit');
-                 Route::post('update', 'Admin\AdminController@employeeupdate');
-                 Route::get('viewprofile/{id}', 'Admin\AdminController@employeeview');
-                 Route::get('uploadfiles/{id}', 'Admin\AdminController@employeeuploadfiles');
-                 Route::post('fileupload', 'Admin\AdminController@employeefileupload');
-                 Route::post('action', 'Admin\AdminController@employeeaction');
+                 Route::get('/', 'Admin\EmployeeController@manageemployee');
+                 Route::get('create', 'Admin\EmployeeController@employeecreate');
+                 Route::post('store', 'Admin\EmployeeController@employeestore');
+                 Route::get('delete/{id}', 'Admin\EmployeeController@employeedelete');
+                 Route::get('edit/{id}', 'Admin\EmployeeController@employeeedit');
+                 Route::post('update', 'Admin\EmployeeController@employeeupdate');
+                 Route::get('viewprofile/{id}', 'Admin\EmployeeController@employeeview');
+                 Route::post('action', 'Admin\EmployeeController@employeeaction');
 
           });
 
