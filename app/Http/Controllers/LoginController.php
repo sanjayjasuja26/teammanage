@@ -37,8 +37,13 @@ class LoginController extends Controller
       }
     }
     public function logout()
-    {
-      Auth::logout();
-      return redirect('/');
-    }
+      {
+        if(\Session::has('superadminId')) {
+          \Session::forget('currentUrl');
+          \Session::forget('superadminrollId');
+          \Session::forget('superadminId');
+        Auth::logout();
+       }
+        return redirect('/');
+      }
 }

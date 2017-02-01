@@ -113,7 +113,7 @@ class AdminController extends Controller
           $newregister->active='1';
           $newregister->save();
 
-          return back();
+           return redirect('/admin/manage');
 
     }
     public function getedit($id)

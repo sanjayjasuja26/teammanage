@@ -25,8 +25,8 @@
                               <tr>
                                   <th>User Name</th>
                                   <th>Email</th>
-                                  <th>date of join</th>
-                                  <th>role</th>
+                                  <th>Date of join</th>
+                                  <th>Role</th>
                                   <th>Action</th>
 
                               </tr>
