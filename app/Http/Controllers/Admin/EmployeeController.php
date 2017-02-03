@@ -80,13 +80,14 @@ class EmployeeController extends Controller
 
       public function employeeupdate(Request $request)
       {
+
           $data=Employ::find($request->id);
           if($data->email != $request->email){
           $validator = Validator::make($request->all(), [
           'email' => 'required|email|unique:employs'
           ]);
           if ($validator->fails()) {
-                     return redirect('/employee/update'.$request->id)
+                     return back()
                                  ->withErrors($validator)
                                  ->withInput();
            }
