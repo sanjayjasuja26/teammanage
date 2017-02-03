@@ -89,6 +89,7 @@ class EmployeeController extends Controller
 
       public function employeeupdate(Request $request)
       {
+        
             $data=Employ::find($request->id);
           if($data->email != $request->email){
           $validator = Validator::make($request->all(), [

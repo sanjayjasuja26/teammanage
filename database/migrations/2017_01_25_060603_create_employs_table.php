@@ -17,10 +17,10 @@ class CreateEmploysTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email');
-            $table->integer('phone_no');
-            $table->integer('dagination_id');
-            $table->float('lat');
-            $table->float('lng');
+            $table->string('phone_no');
+            $table->string('dagination_id');
+            $table->float('lat', 10, 7);
+            $table->float('lng', 10, 7);
             $table->timestamps();
         });
     }

@@ -98,9 +98,7 @@
 
           document.getElementById('lat').value = this.position.lat();
           document.getElementById('lng').value = this.position.lng();
-
-
-           console.log(event);
+          
          });
   }
 </script>
