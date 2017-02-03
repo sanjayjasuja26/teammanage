@@ -17,6 +17,7 @@ class EmployeeController extends Controller
 {
       public function manageemployee()
       {
+
         return view('admin.manageemploy.index',['employs'=>Employ::all()]);
       }
 
@@ -28,12 +29,16 @@ class EmployeeController extends Controller
       public function employeestore(Request $request)
       {
 
+
           $validator = Validator::make($request->all(), [
           'name' => 'required',
           'email' => 'required|email||unique:employs',
           'phone_no'=>'required|numeric',
           'fileupload'=>'required',
-          'dagination_id'=> 'required'
+          'dagination_id'=> 'required',
+          'lat'=>'required',
+          'lng'=>'required'
+
           ]);
           if ($validator->fails()) {
                    return redirect('/employee/create')
@@ -47,6 +52,8 @@ class EmployeeController extends Controller
           $employ->email=$request->email;
           $employ->phone_no=$request->phone_no;
           $employ->dagination_id=$request->dagination_id;
+          $employ->lat=$request->lat;
+          $employ->lng=$request->lng;
           $employ->save();
 
           if($request->hasfile('fileupload'))
@@ -72,16 +79,17 @@ class EmployeeController extends Controller
 
       public function employeeedit($id)
       {
+        $data['documents']=Employdocement::find($id)->first();
 
-      $data['employs']=Employ::find($id);
+
+      $data['employs']=Employ::find($id)->first();
 
         return view('admin.manageemploy.update',$data);
       }
 
       public function employeeupdate(Request $request)
       {
-
-          $data=Employ::find($request->id);
+            $data=Employ::find($request->id);
           if($data->email != $request->email){
           $validator = Validator::make($request->all(), [
           'email' => 'required|email|unique:employs'
@@ -96,7 +104,9 @@ class EmployeeController extends Controller
           $validator = Validator::make($request->all(), [
           'name' => 'required',
           'phone_no'=>'required|numeric',
-          'dagination_id'=> 'required'
+          'dagination_id'=> 'required',
+          'lat'=>'required',
+          'lng'=>'required'
           ]);
           if ($validator->fails()) {
                     return redirect('/employee/update')
@@ -107,6 +117,8 @@ class EmployeeController extends Controller
           $employ->name=$request->name;
           $employ->email=$request->email;
           $employ->phone_no=$request->phone_no;
+          $employ->lat=$request->lat;
+          $employ->lng=$request->lng;
           $employ->dagination_id=$request->dagination_id;
           $employ->save();
 
@@ -141,6 +153,10 @@ class EmployeeController extends Controller
       return back();
 
 
+      }
+      public function mapview()
+      {
+        return view('admin.manageemploy.maps');
       }
 
 

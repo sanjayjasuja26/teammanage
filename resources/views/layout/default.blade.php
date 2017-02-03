@@ -4,15 +4,19 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+      <title>Team Manage</title>
 
-    <title>Team Manage</title>
 
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/font-awesome/css/font-awesome.css" rel="stylesheet">
 
     <link href="/css/animate.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
+      <link href="/css/teammanage.css" rel="stylesheet">
+
 
 </head>
 
@@ -37,8 +41,15 @@
 
     <!-- Custom and plugin javascript -->
     <script src="/js/inspinia.js"></script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9OjIkc5WLaXix3tyqiEyW_G6-VoT3siw&callback=initMap">
+    </script>
+      <script src="/js/app.js"></script>
 
-    @yield('extrascript')
+
+
+
+        @yield('extrascript')
 
 
 

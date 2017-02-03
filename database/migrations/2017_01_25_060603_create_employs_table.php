@@ -18,8 +18,9 @@ class CreateEmploysTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->integer('phone_no');
-            $table->string('dagination_id');
-          
+            $table->integer('dagination_id');
+            $table->float('lat');
+            $table->float('lng');
             $table->timestamps();
         });
     }

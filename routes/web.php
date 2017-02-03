@@ -58,6 +58,7 @@ Route::group(['prefix'=>'admin','middleware' =>'auth'], function () {
                  Route::post('update', 'Admin\EmployeeController@employeeupdate');
                  Route::get('viewprofile/{id}', 'Admin\EmployeeController@employeeview');
                  Route::post('action', 'Admin\EmployeeController@employeeaction');
+                
 
           });
 
