@@ -35,7 +35,13 @@
                   <li>
                       <a href="/employee"><i class="fa fa-th-large"></i> <span class="nav-label">Manage Employee</span></a>
                   </li>
-                
+                  <li>
+                      <a href="/employee/maps"><i class="fa fa-th-large"></i> <span class="nav-label">Maps</span></a>
+                  </li>
+                  <li>
+                      <a href="/employee/maps1"><i class="fa fa-th-large"></i> <span class="nav-label">Maps1</span></a>
+                  </li>
+
                 @else
                   @if(Session::has('superadminrollId') || Auth::user()->roll_id == '2')
                     <li>

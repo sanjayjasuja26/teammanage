@@ -89,7 +89,7 @@ class EmployeeController extends Controller
 
       public function employeeupdate(Request $request)
       {
-        
+
             $data=Employ::find($request->id);
           if($data->email != $request->email){
           $validator = Validator::make($request->all(), [
@@ -159,6 +159,14 @@ class EmployeeController extends Controller
       {
         return view('admin.manageemploy.maps');
       }
+
+      public function mapview1()
+      {
+        return view('admin.manageemploy.maps1');
+
+      }
+
+
 
 
 }

@@ -86,7 +86,7 @@ $(document).ready(function () {
 
     // Append config box / Only for demo purpose
     // Uncomment on server mode to enable XHR calls
-    
+
 
     // Minimalize menu
     $('.navbar-minimalize').click(function () {
