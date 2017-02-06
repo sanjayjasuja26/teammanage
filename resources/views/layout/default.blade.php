@@ -16,9 +16,7 @@
     <link href="/css/animate.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
       <link href="/css/teammanage.css" rel="stylesheet">
-      <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9OjIkc5WLaXix3tyqiEyW_G6-VoT3siw&callback=initMap">
-      </script>
+
 
 
 </head>
@@ -46,6 +44,9 @@
     <script src="/js/inspinia.js"></script>
 
       <script src="/js/app.js"></script>
+      <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9OjIkc5WLaXix3tyqiEyW_G6-VoT3siw&callback=initMap">
+      </script>
 
 
 

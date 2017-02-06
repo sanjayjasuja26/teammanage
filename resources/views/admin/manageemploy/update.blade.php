@@ -45,6 +45,66 @@
                                           <input type="text" class="form-control" name="lng" id="lng" value="{{old('lng',$employs->lng)}}" >
                                        </div>
                                    </div>
+
+                                   <div class="hr-line-dashed"></div>
+                                   <div class="form-group"><label class="col-sm-2 control-label">LatLng</label>
+                                       <div class="col-sm-10">
+                                          <input type="text" class="form-control" name="latLng" id="latLng" value="" >
+                                       </div>
+                                   </div>
+
+                                  <div class="hr-line-dashed"></div>
+                                  <div class="hr-line-dashed"></div>
+                                  <div class="form-group"><label class="col-sm-2 control-label">Postal_code</label>
+                                      <div class="col-sm-10">
+                                         <input type="text" class="form-control" name="postal_code" id="postal_code" value="" >
+                                      </div>
+                                  </div>
+
+                                 <div class="hr-line-dashed"></div>
+
+                                 <div class="hr-line-dashed"></div>
+                                 <div class="form-group"><label class="col-sm-2 control-label">Route</label>
+                                     <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="route" id="route" value="" >
+                                     </div>
+                                 </div>
+
+                                 <div class="hr-line-dashed"></div>
+
+                                 <div class="hr-line-dashed"></div>
+                                 <div class="form-group"><label class="col-sm-2 control-label">country</label>
+                                     <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="country" id="country" value="" >
+                                     </div>
+                                 </div>
+
+                                 <div class="hr-line-dashed"></div>
+
+                                 <div class="hr-line-dashed"></div>
+                                 <div class="form-group"><label class="col-sm-2 control-label">locality</label>
+                                     <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="locality" id="locality" value="" >
+                                     </div>
+                                 </div>
+
+                                 <div class="hr-line-dashed"></div>
+
+                                 <div class="hr-line-dashed"></div>
+                                 <div class="form-group"><label class="col-sm-2 control-label">LatLng</label>
+                                     <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="administrative_area_level_1" id="administrative_area_level_1" value="" >
+                                     </div>
+                                 </div>
+                                 <div class="hr-line-dashed"></div>
+                                 <div class="form-group"><label class="col-sm-2 control-label">LatLng</label>
+                                     <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="administrative_area_level_2" id="administrative_area_level_2" value="" >
+                                     </div>
+                                 </div>
+
+
+
                                    <div class="hr-line-dashed"></div>
                                    <div class="form-group"><label class="col-sm-2 control-label">Dagination</label>
                                        <div class="form-group">
@@ -79,30 +139,50 @@
     @endsection
 
     @section('extrascript')
-      <script>
-          function initMap() {
-            var uluru = {lat: -34.397, lng: 150.644};
-            var map = new google.maps.Map(document.getElementById('map'), {
-              zoom: 4,
-              center: uluru
-            });
-            var marker = new google.maps.Marker({
-                position: uluru,
-                draggable:true,
-                animation: google.maps.Animation.DROP,
-                map: map
+
+    <script>
+      function initMap() {
+        var uluru = {lat: 20.593684, lng: 78.962880};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: uluru
+        });
+          var geocoder = new google.maps.Geocoder();
+        var marker = new google.maps.Marker({
+          position: uluru,
+          draggable:true,
+          map: map
+         });
+           google.maps.event.addListener(marker, 'dragend', function(event){
+
+             var latlng=event.latLng;
+
+               geocoder.geocode({'location': latlng}, function(results, status) {
+
+                  var components_by_address = {};
+                 for (var i = 0; i < results[0].address_components.length; i++) {
+                     var c =results[0].address_components[i];
+                     components_by_address[c.types[0]] = c;
+                 }
+                 console.log(results[0].address_components[0].long_name);
+
+                 document.getElementById('postal_code').value=components_by_address["postal_code"].short_name;
+                 document.getElementById('route').value=components_by_address["route"].long_name;
+                 document.getElementById('country').value=components_by_address["country"].long_name;
+                 document.getElementById('locality').value=components_by_address["locality"].long_name;
+
+                 document.getElementById("administrative_area_level_1").value=components_by_address["administrative_area_level_1"].long_name;
+                 document.getElementById("administrative_area_level_2").value=components_by_address["administrative_area_level_2"].long_name;
+
+                 document.getElementById("lat").value = results[0].geometry.location.lat();
+                 document.getElementById("lng").value = results[0].geometry.location.lat();
+                 document.getElementById("latLng").value=results[0].geometry.location;
+               });
+
              });
+      }
+    </script>
 
-               google.maps.event.addListener(marker, 'dragend', function(event){
-
-                      document.getElementById('lat').value = this.position.lat();
-                      document.getElementById('lng').value = this.position.lng();
-
-
-                   console.log(event);
-                 });
-           }
-      </script>
 
 
     @endsection

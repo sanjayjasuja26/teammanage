@@ -1,84 +1,102 @@
+<!DOCTYPE html>
 <html>
-<head>
-  <title></title>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Reverse Geocoding</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #floating-panel {
+        position: absolute;
+        top: 10px;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+      }
+      #floating-panel {
+        position: absolute;
+        top: 5px;
+        left: 50%;
+        margin-left: -180px;
+        width: 350px;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+      }
+      #latlng {
+        width: 225px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="floating-panel">
+      <input id="latlng" type="text" value="40.714224,-73.961452">
+      <input id="submit" type="button" value="Reverse Geocode">
+    </div>
+    <div id="map"></div>
+    <script>
+      function initMap() {
 
-  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false">
-</script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js">
-</script>
-<style>
-#myMap {
-   height: 350px;
-   width: 680px;
-}
-</style>
-</head>
-<body>
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 8,
+          center: {lat: 40.731, lng: -73.997}
+        });
+        var geocoder = new google.maps.Geocoder;
 
-  <div id="myMap"></div>
-<input id="address" type="text" style="width:600px;"/><br/>
-<input type="text" id="latitude" placeholder="Latitude"/>
-<input type="text" id="longitude" placeholder="Longitude"/>
+        var infowindow = new google.maps.InfoWindow;
 
+        document.getElementById('submit').addEventListener('click', function() {
+          geocodeLatLng(geocoder, map, infowindow);
+        });
+      }
 
+      function geocodeLatLng(geocoder, map, infowindow) {
 
+        var input = document.getElementById('latlng').value;
 
+        var latlngStr = input.split(',', 2);
 
-<script type="text/javascript">
-var map;
-var marker;
-var myLatlng = new google.maps.LatLng(20.268455824834792,85.84099235520011);
-var geocoder = new google.maps.Geocoder();
-var infowindow = new google.maps.InfoWindow();
-function initialize(){
-var mapOptions = {
-zoom: 18,
-center: myLatlng,
-mapTypeId: google.maps.MapTypeId.ROADMAP
-};
-
-map = new google.maps.Map(document.getElementById("myMap"), mapOptions);
-
-marker = new google.maps.Marker({
-map: map,
-position: myLatlng,
-draggable: true
-});
-
-geocoder.geocode({'latLng': myLatlng }, function(results, status) {
-if (status == google.maps.GeocoderStatus.OK) {
-if (results[0]) {
-$('#latitude,#longitude').show();
-$('#address').val(results[0].formatted_address);
-$('#latitude').val(marker.getPosition().lat());
-$('#longitude').val(marker.getPosition().lng());
-infowindow.setContent(results[0].formatted_address);
-infowindow.open(map, marker);
-}
-}
-});
-
-google.maps.event.addListener(marker, 'dragend', function() {
-  alert('here');
-
-geocoder.geocode({'latLng': marker.getPosition()}, function(results, status) {
-if (status == google.maps.GeocoderStatus.OK) {
-if (results[0]) {
-$('#address').val(results[0].formatted_address);
-$('#latitude').val(marker.getPosition().lat());
-$('#longitude').val(marker.getPosition().lng());
-infowindow.setContent(results[0].formatted_address);
-infowindow.open(map, marker);
-}
-}
-});
-});
-
-}
-google.maps.event.addDomListener(window, 'load', initialize);
-</script>
-
-
-
-</body>
+        var latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
+        latlng
+          console.log(latlng); 
+        geocoder.geocode({'location': latlng}, function(results, status) {
+          if (status === 'OK') {
+            if (results[1]) {
+              map.setZoom(11);
+              var marker = new google.maps.Marker({
+                position: latlng,
+                map: map
+              });
+              infowindow.setContent(results[1].formatted_address);
+              infowindow.open(map, marker);
+            } else {
+              window.alert('No results found');
+            }
+          } else {
+            window.alert('Geocoder failed due to: ' + status);
+          }
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9OjIkc5WLaXix3tyqiEyW_G6-VoT3siw&callback=initMap">
+    </script>
+  </body>
 </html>
