@@ -32,7 +32,6 @@
                                            <input type="text" class="form-control" name="phone_no" value="{{old('phone_no',$employs->phone_no)}}" required="">
                                          </div>
                                      </div>
-
                                    <div class="hr-line-dashed"></div>
                                     <div class="form-group"><label class="col-sm-2 control-label">Location Lap</label>
                                       <div class="col-sm-10">
@@ -45,66 +44,51 @@
                                           <input type="text" class="form-control" name="lng" id="lng" value="{{old('lng',$employs->lng)}}" >
                                        </div>
                                    </div>
-
                                    <div class="hr-line-dashed"></div>
                                    <div class="form-group"><label class="col-sm-2 control-label">LatLng</label>
                                        <div class="col-sm-10">
-                                          <input type="text" class="form-control" name="latLng" id="latLng" value="" >
+                                          <input type="text" class="form-control" name="latLng" id="latLng" value="{{old('latLng',$employs->latLng)}}" >
                                        </div>
                                    </div>
 
-                                  <div class="hr-line-dashed"></div>
-                                  <div class="hr-line-dashed"></div>
-                                  <div class="form-group"><label class="col-sm-2 control-label">Postal_code</label>
-                                      <div class="col-sm-10">
-                                         <input type="text" class="form-control" name="postal_code" id="postal_code" value="" >
-                                      </div>
-                                  </div>
-
-                                 <div class="hr-line-dashed"></div>
 
                                  <div class="hr-line-dashed"></div>
                                  <div class="form-group"><label class="col-sm-2 control-label">Route</label>
                                      <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="route" id="route" value="" >
+                                        <input type="text" class="form-control" name="route" id="route" value="{{old('route',$employs->route)}}" >
                                      </div>
                                  </div>
-
                                  <div class="hr-line-dashed"></div>
-
-                                 <div class="hr-line-dashed"></div>
-                                 <div class="form-group"><label class="col-sm-2 control-label">country</label>
-                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="country" id="country" value="" >
-                                     </div>
-                                 </div>
-
-                                 <div class="hr-line-dashed"></div>
-
                                  <div class="hr-line-dashed"></div>
                                  <div class="form-group"><label class="col-sm-2 control-label">locality</label>
                                      <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="locality" id="locality" value="" >
+                                        <input type="text" class="form-control" name="locality" id="locality" value="{{old('locality',$employs->locality)}}" >
                                      </div>
                                  </div>
-
                                  <div class="hr-line-dashed"></div>
-
-                                 <div class="hr-line-dashed"></div>
-                                 <div class="form-group"><label class="col-sm-2 control-label">LatLng</label>
+                                 <div class="form-group"><label class="col-sm-2 control-label">District</label>
                                      <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="administrative_area_level_1" id="administrative_area_level_1" value="" >
+                                        <input type="text" class="form-control" name="administrative_area_level_2" id="administrative_area_level_2" value="{{old('administrative_area_level_2',$employs->administrative_area_level_2)}}" >
                                      </div>
                                  </div>
                                  <div class="hr-line-dashed"></div>
-                                 <div class="form-group"><label class="col-sm-2 control-label">LatLng</label>
+                                 <div class="form-group"><label class="col-sm-2 control-label">State</label>
                                      <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="administrative_area_level_2" id="administrative_area_level_2" value="" >
+                                        <input type="text" class="form-control" name="administrative_area_level_1" id="administrative_area_level_1" value="{{old('administrative_area_level_1',$employs->administrative_area_level_1)}}" >
                                      </div>
                                  </div>
-
-
-
+                                 <div class="hr-line-dashed"></div>
+                                 <div class="form-group"><label class="col-sm-2 control-label">country</label>
+                                     <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="country" id="country" value="{{old('country',$employs->country)}}" >
+                                     </div>
+                                 </div>
+                                <div class="hr-line-dashed"></div>
+                                 <div class="form-group"><label class="col-sm-2 control-label">Postal_code</label>
+                                     <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="postal_code" id="postal_code" value="{{old('postal_code',$employs->postal_code)}}" >
+                                     </div>
+                                 </div>
                                    <div class="hr-line-dashed"></div>
                                    <div class="form-group"><label class="col-sm-2 control-label">Dagination</label>
                                        <div class="form-group">
@@ -141,18 +125,25 @@
     @section('extrascript')
 
     <script>
+
+
+    var lat = '{{$employs->lat}}';
+    var lng = '{{$employs->lng}}';
+
+
       function initMap() {
-        var uluru = {lat: 20.593684, lng: 78.962880};
+
+        var uluru = {lat:{{$employs->lat}}, lng: {{$employs->lng}}};
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 4,
           center: uluru
         });
           var geocoder = new google.maps.Geocoder();
         var marker = new google.maps.Marker({
-          position: uluru,
-          draggable:true,
-          map: map
-         });
+              position: uluru,
+              draggable:true,
+              map: map
+             });
            google.maps.event.addListener(marker, 'dragend', function(event){
 
              var latlng=event.latLng;
@@ -175,7 +166,7 @@
                  document.getElementById("administrative_area_level_2").value=components_by_address["administrative_area_level_2"].long_name;
 
                  document.getElementById("lat").value = results[0].geometry.location.lat();
-                 document.getElementById("lng").value = results[0].geometry.location.lat();
+                 document.getElementById("lng").value = results[0].geometry.location.lng();
                  document.getElementById("latLng").value=results[0].geometry.location;
                });
 

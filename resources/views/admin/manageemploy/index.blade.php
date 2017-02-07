@@ -17,7 +17,7 @@
                       {{csrf_field()}}
                   <div class="ibox-title" style="margin-bottom:10px">
                       <h5>Total Employ  {{$employs->count()}} </h5>
-                      <div class="deletecheckbox" style="margin-left:1000px">
+                      <div class="deletecheckbox" style="margin-left:900px">
 
                       <button class="btn btn-primary" name="button" value="delete" style="margin-bottm:10px">
                         <i class="fa fa-trash" aria-hidden="true"></i>
@@ -36,8 +36,10 @@
                                   <th>Email</th>
                                   <th>Phone no</th>
                                   <th>Designation</th>
-                                  <th>lap</th>
-                                  <th>lng</th>
+                                  <th>District</th>
+                                  <th>State</th>
+                                  <th>Country</th>
+                                  <th>Postal_code</th>
                                   <th>Action</th>
                               </tr>
                               </thead>
@@ -49,12 +51,14 @@
                                     <td>{{$employ->email}}</td>
                                     <td>{{$employ->phone_no}}</td>
                                     <td>{{$employ->dagination->dagination}}</td>
-                                    <td>{{$employ->lat}}</td>
-                                    <td>{{$employ->lng}}</td>
+                                    <td>{{$employ->administrative_area_level_2}}</td>
+                                    <td>{{$employ->administrative_area_level_1}}</td>
+                                    <td>{{$employ->country}}</td>
+                                    <td>{{$employ->postal_code}}</td>
                                     <td>
                                         <span><a href="/employee/delete/{{$employ->id}}" title="delete"><span class="glyphicon glyphicon-trash"  ></span></a></span>|
                                         <span><a href="/employee/edit/{{$employ->id}}" title="Edit"><span class="glyphicon glyphicon-edit" ></span></a></span>|
-                                        <span><a href="/employee/viewprofile/{{$employ->id}}" title="Viewprofile"><span class="fa fa-user" ></span></a></span>
+                                        <span><a href="/employee/viewprofile/{{$employ->id}}"  title="Viewprofile"><span class="fa fa-user" ></span></a></span>
                                     </td>
                                   </tr>
                              @endforeach

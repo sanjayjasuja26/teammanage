@@ -45,7 +45,6 @@
       <input id="administrative_area_level_2" type="text">
       <input id="country" type="text" >
       <input id="postal_code" type="text" >
-
     </div>
     <div id="map"></div>
     <script>
@@ -64,9 +63,7 @@
                     function(results, status)
                     {
                      console.log(results[0].geometry.location);
-
                     if (status === 'OK') {
-
                       mymap.setCenter(results[0].geometry.location);
                       var marker = new google.maps.Marker({
                         map: mymap,
@@ -99,16 +96,12 @@
                     } else {
                       alert('Geocode was not successful for the following reason: ' + status);
                     }
-
                   });
         });
       }
-
-
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9OjIkc5WLaXix3tyqiEyW_G6-VoT3siw&callback=initMap">
     </script>
-
   </body>
 </html>

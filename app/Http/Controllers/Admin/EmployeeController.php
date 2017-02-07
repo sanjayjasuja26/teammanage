@@ -29,7 +29,6 @@ class EmployeeController extends Controller
       public function employeestore(Request $request)
       {
 
-
           $validator = Validator::make($request->all(), [
           'name' => 'required',
           'email' => 'required|email||unique:employs',
@@ -54,6 +53,15 @@ class EmployeeController extends Controller
           $employ->dagination_id=$request->dagination_id;
           $employ->lat=$request->lat;
           $employ->lng=$request->lng;
+
+
+          $employ->latLng=$request->latLng;
+          $employ->route=$request->route;
+          $employ->locality=$request->locality;
+          $employ->administrative_area_level_2=$request->administrative_area_level_2;
+          $employ->administrative_area_level_1=$request->administrative_area_level_1;
+          $employ->country=$request->country;
+          $employ->postal_code=$request->postal_code;
           $employ->save();
 
           if($request->hasfile('fileupload'))
@@ -79,18 +87,13 @@ class EmployeeController extends Controller
 
       public function employeeedit($id)
       {
-        $data['documents']=Employdocement::find($id)->first();
-
-
-      $data['employs']=Employ::find($id)->first();
-
-        return view('admin.manageemploy.update',$data);
+      $data['employs']=Employ::find($id);
+      return view('admin.manageemploy.update',$data);
       }
 
       public function employeeupdate(Request $request)
       {
-
-            $data=Employ::find($request->id);
+          $data=Employ::find($request->id);
           if($data->email != $request->email){
           $validator = Validator::make($request->all(), [
           'email' => 'required|email|unique:employs'
@@ -121,6 +124,16 @@ class EmployeeController extends Controller
           $employ->lat=$request->lat;
           $employ->lng=$request->lng;
           $employ->dagination_id=$request->dagination_id;
+
+          $employ->latLng=$request->latLng;
+          $employ->route=$request->route;
+          $employ->locality=$request->locality;
+          $employ->administrative_area_level_2=$request->administrative_area_level_2;
+          $employ->administrative_area_level_1=$request->administrative_area_level_1;
+          $employ->country=$request->country;
+          $employ->postal_code=$request->postal_code;
+
+
           $employ->save();
 
       if($request->hasfile('fileupload'))

@@ -55,52 +55,41 @@
                                     </div>
 
                                    <div class="hr-line-dashed"></div>
-                                   <div class="hr-line-dashed"></div>
-                                   <div class="form-group"><label class="col-sm-2 control-label">Postal_code</label>
-                                       <div class="col-sm-10">
-                                          <input type="text" class="form-control" name="postal_code" id="postal_code" value="" >
-                                       </div>
-                                   </div>
-
                                   <div class="hr-line-dashed"></div>
-
                                   <div class="hr-line-dashed"></div>
                                   <div class="form-group"><label class="col-sm-2 control-label">Route</label>
                                       <div class="col-sm-10">
                                          <input type="text" class="form-control" name="route" id="route" value="" >
                                       </div>
                                   </div>
-
                                   <div class="hr-line-dashed"></div>
-
+                                    <div class="form-group"><label class="col-sm-2 control-label">locality</label>
+                                      <div class="col-sm-10">
+                                         <input type="text" class="form-control" name="locality" id="locality" value="" >
+                                      </div>
+                                  </div>
+                                  <div class="hr-line-dashed"></div>
+                                  <div class="form-group"><label class="col-sm-2 control-label">District</label>
+                                      <div class="col-sm-10">
+                                         <input type="text" class="form-control" name="administrative_area_level_2" id="administrative_area_level_2" value="" >
+                                      </div>
+                                  </div>
+                                  <div class="hr-line-dashed"></div>
+                                  <div class="form-group"><label class="col-sm-2 control-label">State</label>
+                                      <div class="col-sm-10">
+                                         <input type="text" class="form-control" name="administrative_area_level_1" id="administrative_area_level_1" value="" >
+                                      </div>
+                                  </div>
                                   <div class="hr-line-dashed"></div>
                                   <div class="form-group"><label class="col-sm-2 control-label">country</label>
                                       <div class="col-sm-10">
                                          <input type="text" class="form-control" name="country" id="country" value="" >
                                       </div>
                                   </div>
-
                                   <div class="hr-line-dashed"></div>
-
-                                  <div class="hr-line-dashed"></div>
-                                  <div class="form-group"><label class="col-sm-2 control-label">locality</label>
+                                  <div class="form-group"><label class="col-sm-2 control-label">Postal_code</label>
                                       <div class="col-sm-10">
-                                         <input type="text" class="form-control" name="locality" id="locality" value="" >
-                                      </div>
-                                  </div>
-
-                                  <div class="hr-line-dashed"></div>
-
-                                  <div class="hr-line-dashed"></div>
-                                  <div class="form-group"><label class="col-sm-2 control-label">LatLng</label>
-                                      <div class="col-sm-10">
-                                         <input type="text" class="form-control" name="administrative_area_level_1" id="administrative_area_level_1" value="" >
-                                      </div>
-                                  </div>
-                                  <div class="hr-line-dashed"></div>
-                                  <div class="form-group"><label class="col-sm-2 control-label">LatLng</label>
-                                      <div class="col-sm-10">
-                                         <input type="text" class="form-control" name="administrative_area_level_2" id="administrative_area_level_2" value="" >
+                                         <input type="text" class="form-control" name="postal_code" id="postal_code" value="" >
                                       </div>
                                   </div>
 
@@ -162,19 +151,18 @@
                  var c =results[0].address_components[i];
                  components_by_address[c.types[0]] = c;
              }
-             console.log(results[0].address_components[0].long_name);
-
              document.getElementById('postal_code').value=components_by_address["postal_code"].short_name;
              document.getElementById('route').value=components_by_address["route"].long_name;
              document.getElementById('country').value=components_by_address["country"].long_name;
              document.getElementById('locality').value=components_by_address["locality"].long_name;
-        
+
              document.getElementById("administrative_area_level_1").value=components_by_address["administrative_area_level_1"].long_name;
              document.getElementById("administrative_area_level_2").value=components_by_address["administrative_area_level_2"].long_name;
 
              document.getElementById("lat").value = results[0].geometry.location.lat();
-             document.getElementById("lng").value = results[0].geometry.location.lat();
+             document.getElementById("lng").value = results[0].geometry.location.lng();
              document.getElementById("latLng").value=results[0].geometry.location;
+
            });
 
          });
