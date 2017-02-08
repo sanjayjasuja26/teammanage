@@ -125,7 +125,7 @@
                    </div>
                </div>
      </div>
-         <input id="address" type="textbox" placeholder="Search Location">
+         <input id="address_value" type="textbox" placeholder="Search Location">
            <input id="submit" type="button" value="Geocode">
      <div id="map" ></div>
 
@@ -137,117 +137,81 @@
 <script>
   function initMap() {
 
-    var position = {lat: 20.593684, lng: 78.962880};
-  
+          var position = {lat: 20.593684, lng: 78.962880};
+          var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: position,
+           });
 
-    var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 4,
-      center: position
-    });
-    var geocoder = new google.maps.Geocoder();
+          marker(position,map);
+          var geocoder = new google.maps.Geocoder();
 
+           document.getElementById('submit').addEventListener('click', function() {
+               var address = document.getElementById('address_value').value;
+               geocoder.geocode({'address': address},function(results, status){
+                   if(status==='OK'){
+                         var latlng=results[0].geometry.location;
+                         getGeoCodeData(latlng,map,geocoder);
+                      }
+                  else{
+                      alert('Geocode was not successful for the following reason: ' + status);
+                     }
+                  });
+           });
+         google.maps.event.addListener(map, 'click', function(event) {
+              var latlng=event.latLng;
+              getGeoCodeData(latlng,map,geocoder);
+            });
+         google.maps.event.addListener(marker, 'dragend', function(event){
+           alert('here');
+         });
 
+  }
+  //function map end
+
+//marker function definacations
+  function marker(position,map)
+  {
     var marker = new google.maps.Marker({
       position: position,
       draggable:true,
       map: map
      });
-       document.getElementById('submit').addEventListener('click', function() {
-           var address = document.getElementById('address').value;
 
-         geocoder.geocode(
-           {
-             'address': address
-           },
-           function(results, status)
-           {
-             if(status==='OK'){
-                   map.setCenter(results[0].geometry.location);
-                   var marker = new google.maps.Marker({
-                     map: map,
-                     draggable:true,
-                     position: results[0].geometry.location
-                   });
+  }
+  //marker function definacationsend
 
-                   var components_address = {};
-                   for (var i = 0; i < results[0].address_components.length; i++) {
-                       var data =results[0].address_components[i];
-                       components_address[data.types[0]] = data;
-                   }
-                    document.getElementById("lat").value = results[0].geometry.location.lat();
-                    document.getElementById("lng").value = results[0].geometry.location.lng();
-                    document.getElementById("latLng").value=results[0].geometry.location;
-                    document.getElementById("address").value=results[0].formatted_address;
-                    document.getElementById("administrative_area_level_1").value=components_address["administrative_area_level_1"].long_name;
-                    document.getElementById("administrative_area_level_2").value=components_address["administrative_area_level_2"].long_name;
-                    document.getElementById('country').value=components_address["country"].long_name;
-                    document.getElementById('locality').value=components_address["locality"].long_name;
-                    document.getElementById('route').value=components_address["route"].long_name;
-                    document.getElementById('postal_code').value=components_address["postal_code"].short_name;
-                   }
-              else{
-              alert('Geocode was not successful for the following reason: ' + status);
-               }
-            });
-       });
-       google.maps.event.addListener(map, 'click', function(event) {
-           var latlng=event.latLng;
-          geocoder.geocode(
-            {'location': latlng},
-            function(results, status) {
-              if(status==='OK'){
-                map.setCenter(results[0].geometry.location);
-                var marker = new google.maps.Marker({
-                  map: map,
-                  draggable:true,
-                  position: results[0].geometry.location
-                });
-                var components_address = {};
-                for (var i = 0; i < results[0].address_components.length; i++) {
-                    var data =results[0].address_components[i];
-                    components_address[data.types[0]] = data;
-                }
-                 document.getElementById("lat").value = results[0].geometry.location.lat();
-                 document.getElementById("lng").value = results[0].geometry.location.lng();
-                 document.getElementById("latLng").value=results[0].geometry.location;
-                 document.getElementById("address").value=results[0].formatted_address;
-                 document.getElementById("administrative_area_level_1").value=components_address["administrative_area_level_1"].long_name;
-                 document.getElementById("administrative_area_level_2").value=components_address["administrative_area_level_2"].long_name;
-                 document.getElementById('country').value=components_address["country"].long_name;
-                 document.getElementById('locality').value=components_address["locality"].long_name;
-                 document.getElementById('route').value=components_address["route"].long_name;
-                 document.getElementById('postal_code').value=components_address["postal_code"].short_name;
-              }
-              else {
-                alert('Geocode was not successful for the following reason: ' + status);
-               }
-             });
-          });
-       google.maps.event.addListener(marker, 'dragend', function(event){
-         var latlng=event.latLng;
-           geocoder.geocode(
-             {'location': latlng},
-             function(results, status) {
 
-             var components_by_address = {};
-
-             for (var i = 0; i < results[0].address_components.length; i++) {
-                 var c =results[0].address_components[i];
-                 components_by_address[c.types[0]] = c;
-             }
-             document.getElementById("address").value=results[0].formatted_address;
-             document.getElementById('postal_code').value=components_by_address["postal_code"].short_name;
-             document.getElementById('route').value=components_by_address["route"].long_name;
-             document.getElementById('country').value=components_by_address["country"].long_name;
-             document.getElementById('locality').value=components_by_address["locality"].long_name;
-             document.getElementById("administrative_area_level_1").value=components_by_address["administrative_area_level_1"].long_name;
-             document.getElementById("administrative_area_level_2").value=components_by_address["administrative_area_level_2"].long_name;
+//Get data to geo code to store data function
+  function getGeoCodeData(latlng,map,geocoder)
+  {
+     geocoder.geocode({'location': latlng},function(results, status) {
+        if(status==='OK'){
+          var position=results[0].geometry.location;
+          map.setCenter(results[0].geometry.location);
+          marker(position,map);
+          var components_address = {};
+            for (var i = 0; i < results[0].address_components.length; i++) {
+                var data =results[0].address_components[i];
+                components_address[data.types[0]] = data;
+            }
              document.getElementById("lat").value = results[0].geometry.location.lat();
              document.getElementById("lng").value = results[0].geometry.location.lng();
              document.getElementById("latLng").value=results[0].geometry.location;
-           });
-         });
+             document.getElementById("address").value=results[0].formatted_address;
+             document.getElementById("administrative_area_level_1").value=components_address["administrative_area_level_1"].long_name;
+             document.getElementById("administrative_area_level_2").value=components_address["administrative_area_level_2"].long_name;
+             document.getElementById('country').value=components_address["country"].long_name;
+             document.getElementById('locality').value=components_address["locality"].long_name;
+             document.getElementById('route').value=components_address["route"].long_name;
+             document.getElementById('postal_code').value=components_address["postal_code"].short_name;
+        }
+        else {
+          alert('Geocode was not successful for the following reason: ' + status);
+         }
+      });
   }
+  //Get data to geo code to store data function end
 </script>
 
 
