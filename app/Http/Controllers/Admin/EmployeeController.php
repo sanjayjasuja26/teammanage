@@ -62,6 +62,7 @@ class EmployeeController extends Controller
           $employ->administrative_area_level_1=$request->administrative_area_level_1;
           $employ->country=$request->country;
           $employ->postal_code=$request->postal_code;
+          $employ->address=$request->address;
           $employ->save();
 
           if($request->hasfile('fileupload'))
@@ -132,6 +133,7 @@ class EmployeeController extends Controller
           $employ->administrative_area_level_1=$request->administrative_area_level_1;
           $employ->country=$request->country;
           $employ->postal_code=$request->postal_code;
+          $employ->address=$request->address;
 
 
           $employ->save();
@@ -153,6 +155,7 @@ class EmployeeController extends Controller
 
       public function employeeview($id)
       {
+        
       return view('admin.manageemploy.employview',['employs'=>Employ::find($id)]);
       }
 

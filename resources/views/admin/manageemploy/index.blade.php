@@ -39,7 +39,7 @@
                                   <th>District</th>
                                   <th>State</th>
                                   <th>Country</th>
-                                  <th>Postal_code</th>
+                                  <th>Address</th>
                                   <th>Action</th>
                               </tr>
                               </thead>
@@ -54,7 +54,7 @@
                                     <td>{{$employ->administrative_area_level_2}}</td>
                                     <td>{{$employ->administrative_area_level_1}}</td>
                                     <td>{{$employ->country}}</td>
-                                    <td>{{$employ->postal_code}}</td>
+                                    <td>{{$employ->address}}</td>
                                     <td>
                                         <span><a href="/employee/delete/{{$employ->id}}" title="delete"><span class="glyphicon glyphicon-trash"  ></span></a></span>|
                                         <span><a href="/employee/edit/{{$employ->id}}" title="Edit"><span class="glyphicon glyphicon-edit" ></span></a></span>|

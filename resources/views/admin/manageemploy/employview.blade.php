@@ -61,6 +61,18 @@
                                  </div>
                              </div>
                          </div>
+                         <hr>
+                         <div class="container-fluid">
+                             <div class="row">
+                                <div class="col-sm-3" >
+                                 <h4><strong> Designation</strong></h4>
+                                </div>
+                                 <div class="col-sm-9">
+                                   <span>{{$employs->address}}</span>
+                                 </div>
+                             </div>
+                         </div>
+
                       </div>
                   </div>
                </div>
@@ -68,6 +80,38 @@
           </div>
   </div>
 
+   <div id="map" ></div>
+
+
+@endsection
+
+
+@section('extrascript')
+
+<script>
+
+
+var lat = '{{$employs->lat}}';
+var lng = '{{$employs->lng}}';
+
+
+  function initMap() {
+
+    var uluru = {lat:{{$employs->lat}}, lng: {{$employs->lng}}};
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 4,
+      center: uluru
+    });
+      var geocoder = new google.maps.Geocoder();
+    var marker = new google.maps.Marker({
+          position: uluru,
+        
+          map: map
+         });
+
+
+  }
+</script>
 
 
 

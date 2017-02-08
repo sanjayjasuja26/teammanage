@@ -28,6 +28,7 @@ class CreateEmploysTable extends Migration
             $table->string('locality');
             $table->string('administrative_area_level_1');
             $table->string('administrative_area_level_2');
+            $table->string('address');
             $table->timestamps();
         });
     }

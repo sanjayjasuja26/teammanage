@@ -62,7 +62,7 @@
                     },
                     function(results, status)
                     {
-                     console.log(results[0].geometry.location);
+
                     if (status === 'OK') {
                       mymap.setCenter(results[0].geometry.location);
                       var marker = new google.maps.Marker({
@@ -70,6 +70,7 @@
                         draggable:true,
                         position: results[0].geometry.location
                       });
+                      
                       google.maps.event.addListener(marker, 'dragend', function(event){
                             var latlng=event.latLng;
                               geocoder.geocode({'location': latlng}, function(results, status) {
